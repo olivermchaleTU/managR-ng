@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  storyServiceBaseUrl: 'https://localhost:44365/'
 };
