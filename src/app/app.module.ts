@@ -11,6 +11,7 @@ import { BoardTaskComponent } from './components/board-task/board-task.component
 import { TopNavComponent } from './components/top-nav/top-nav.component';
 import { BoardService } from './services/board.service';
 import { HttpClientModule } from '@angular/common/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    NgbModule.forRoot()
   ],
   providers: [
     BoardService
