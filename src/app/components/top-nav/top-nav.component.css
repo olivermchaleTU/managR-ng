@@ -1,0 +1,35 @@
+.managR-brand {
+    width: 51px;
+    height: 32px;
+}
+
+/* Mobile */
+@media only screen and (min-width: 480px) {
+    .managR-center {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+}
+
+/* Desktop */
+@media only screen and (min-width: 992px) {
+    .managR-center {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .managR-nav {
+        max-height: 50px;
+    }
+}
+.navbar {
+    list-style-type: none;
+}
+
+.x {
+    background-color: #f8f9fa;
+    padding: 5px;
+}
+
+.navbar-toggler-icon {
+    background-image: ''
+}

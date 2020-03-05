@@ -11,7 +11,8 @@ import { BoardTaskComponent } from './components/board-task/board-task.component
 import { TopNavComponent } from './components/top-nav/top-nav.component';
 import { BoardService } from './services/board.service';
 import { HttpClientModule } from '@angular/common/http';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -20,13 +21,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BoardListComponent,
     BoardTaskComponent,
     TopNavComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    NgbModule
+    FontAwesomeModule
   ],
   providers: [
     BoardService
