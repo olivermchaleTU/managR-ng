@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { BoardStory } from 'src/app/utils/types/BoardTypes';
 
 @Component({
   selector: 'app-board-list',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BoardListComponent implements OnInit {
 
+  @Input() story: BoardStory;
   constructor() { }
 
   ngOnInit() {
