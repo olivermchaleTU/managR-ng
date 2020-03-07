@@ -4,7 +4,14 @@ export class BoardStory {
     storyPoints: number;
     priority: number; // todo? enums ?
     status: number;
-    tasks: BoardTask[];
+    tasks: TaskList;
+
+}
+
+export class TaskList {
+    todo: BoardTask[];
+    inProgress: BoardTask[];
+    done: BoardTask[];
 }
 
 export class BoardTask {
