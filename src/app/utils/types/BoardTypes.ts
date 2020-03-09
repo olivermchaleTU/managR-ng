@@ -12,6 +12,7 @@ export class TaskList {
     todo: BoardTask[];
     inProgress: BoardTask[];
     done: BoardTask[];
+    blocked: BoardTask[];
 }
 
 export class BoardTask {

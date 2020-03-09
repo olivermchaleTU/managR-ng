@@ -26,10 +26,15 @@
 }
 
 .x {
-    background-color: #f8f9fa;
+    background-color: white;
     padding: 5px;
 }
 
 .navbar-toggler-icon {
     background-image: ''
+}
+
+.managR-nav {
+    background-color: white;
+    box-shadow: 0 1px 3px 0 rgba(21,27,38,.15);
 }

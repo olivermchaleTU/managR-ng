@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NgPersonModule } from 'ng-person';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     AppRoutingModule,
     HttpClientModule,
     DragDropModule,
+    NgPersonModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     FontAwesomeModule
   ],

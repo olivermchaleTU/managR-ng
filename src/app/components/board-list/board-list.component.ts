@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { BoardStory } from 'src/app/utils/types/BoardTypes';
+import { BoardStory, BoardTask } from 'src/app/utils/types/BoardTypes';
 import { moveItemInArray, CdkDragDrop, transferArrayItem, CdkDragEnter, CdkDragExit } from '@angular/cdk/drag-drop';
 import { faEye, faEyeSlash, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
@@ -66,6 +66,21 @@ export class BoardListComponent implements OnInit {
     //   default:
     //       break;
     // }
+  }
+
+  getStatusClass(item: BoardTask) {
+    switch (item.status) {
+      case 0:
+        return 'border-purple';
+      case 1:
+        return 'border-orange';
+      case 2:
+        return 'border-red';
+      case 3:
+        return 'border-green';
+      default:
+        return 'border-purple';
+    }
   }
 
   toggleStoryVisiblity() {
