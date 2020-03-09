@@ -27,7 +27,6 @@ export class BoardComponent implements OnInit {
   }
 
   handleBoardResponse(resp: BoardResponse): void {
-    console.log(resp);
     this.boardResponse = true;
     this.stories = resp.stories;
   }

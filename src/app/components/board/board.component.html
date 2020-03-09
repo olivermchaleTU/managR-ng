@@ -1,5 +1,5 @@
-<div *ngIf="!boardResponse">
-    <fa-icon [icon]="faSpinner" [spin]="true"></fa-icon>
+<div class="center mt" *ngIf="!boardResponse">
+    <fa-icon [icon]="faSpinner" [spin]="true" size="lg"></fa-icon>
 </div>
 <div *ngIf="boardResponse">
     <div *ngFor="let story of stories">
