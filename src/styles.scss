@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+
+:root {
+    /* Colours */
+    --managR-blue: #67D0DD;
+    --managR-green: #9FE481;
+    --managR-yellow: #F6E785;
+    --managR-red: #FAAFA5;
+    --managR-pink: #DC95DD;
+    --managR-purple: #A885EE;
+    --managR-lightext: rgb(224, 224, 224);
+}
+
+.cdkDrag {
+    display: inline-block;
+  }

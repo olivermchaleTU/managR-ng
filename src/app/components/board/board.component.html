@@ -1,0 +1,8 @@
+<div class="center mt" *ngIf="!boardResponse">
+    <fa-icon [icon]="faSpinner" [spin]="true" size="lg"></fa-icon>
+</div>
+<div *ngIf="boardResponse">
+    <div *ngFor="let story of stories">
+        <app-board-list [story]="story"></app-board-list>
+    </div>
+</div>
