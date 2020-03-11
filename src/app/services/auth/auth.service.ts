@@ -14,10 +14,7 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   register(registrationInfo: RegisterModel): Observable<any> {
-    return this.http.post<RegisterModel>(`${this.authBaseUrl}/auth/register`, registrationInfo)
-    .pipe(
-      catchError(this.handleError('register', registrationInfo))
-    )
+    return this.http.post<RegisterModel>(`${this.authBaseUrl}/auth/register`, registrationInfo);
   }
 
   private handleError<T> (operation = 'operation', result?: T) {

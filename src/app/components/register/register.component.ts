@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { RegisterModel } from 'src/app/utils/types/AuthTypes';
+import Swal from 'sweetalert2';
+import { IconDefinition, faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-register',
@@ -11,6 +13,9 @@ import { RegisterModel } from 'src/app/utils/types/AuthTypes';
 export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
+  loading = false;
+  faSpinner: IconDefinition = faSpinner;
+
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService
@@ -35,6 +40,7 @@ export class RegisterComponent implements OnInit {
   }
 
   submit() {
+    this.loading = true;
     const registrationInfo: RegisterModel = {
       firstName: this.registerForm.get('firstName').value,
       lastName: this.registerForm.get('lastName').value,
@@ -51,11 +57,29 @@ export class RegisterComponent implements OnInit {
   }
 
   handleRegisterSuccess() {
-    console.log('success');
+    this.loading = false;
+    Swal.fire({
+      title: 'Registration successful!',
+      text: 'Account successfully created',
+      icon: 'success',
+      confirmButtonText: 'Log In',
+    }).then((login) => {
+      this.navigateToLogin();
+    });
   }
 
   handleRegisterFailure() {
-    console.error('failure');
+    this.loading = false;
+    Swal.fire({
+      title: 'Registration Failed!',
+      text: 'Account failed to create',
+      icon: 'error',
+      confirmButtonText: 'Ok',
+    });
+  }
+
+  navigateToLogin() {
+    console.log('wops');
   }
 
 }
