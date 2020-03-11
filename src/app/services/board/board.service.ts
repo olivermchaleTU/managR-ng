@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { BoardResponse } from '../utils/types/BoardTypes';
+import { BoardResponse } from '../../utils/types/BoardTypes';
 
 @Injectable({
   providedIn: 'root'

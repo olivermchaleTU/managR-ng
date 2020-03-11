@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BoardService } from 'src/app/services/board.service';
+import { BoardService } from 'src/app/services/board/board.service';
 import { BoardResponse, BoardStory } from 'src/app/utils/types/BoardTypes';
 import { faSpinner, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
