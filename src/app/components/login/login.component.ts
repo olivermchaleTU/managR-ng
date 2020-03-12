@@ -47,17 +47,19 @@ export class LoginComponent implements OnInit {
     };
 
     this.authService.login(loginDetails).subscribe(
-      resp => this.handleLoginSuccess(),
-      err => this.handleLoginFailure()
+      resp => this.handleLoginSuccess(resp),
+      err => this.handleLoginFailure(err)
     );
   }
 
-  handleLoginSuccess() {
+  handleLoginSuccess(resp: any) {
     this.loading = false;
+    this.authService.isLoggedIn = true;
+    this.authService.setTokenInfo(resp.access_token);
     this.router.navigate(['/board']);
   }
 
-  handleLoginFailure() {
+  handleLoginFailure(error: any) {
     this.loading = false;
     Swal.fire({
       title: 'Login Failed!',
