@@ -1,0 +1,103 @@
+<div class="register">
+  <div class="background">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4 offset-md-4 align-middle vertical-center">
+        <div class="card managR-card">
+          <img class="managR-logo" src="assets/images/logo.png">
+          <form [formGroup]="registerForm" (ngSubmit)="submit()">
+            <div class="form-group">
+              <label>
+                First Name
+              </label>
+              <input type="text" formControlName="firstName" class="form-control" />
+              <div *ngIf="form.firstName.errors && form.firstName.touched">
+                <div class="error-text" *ngIf="form.firstName.errors.required">
+                  First Name is required.
+                </div>
+                <div class="error-text" *ngIf="form.firstName.errors.pattern && !form.firstName.errors.required">
+                  Must consist of only alphabetic characters
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" formControlName="lastName" class="form-control">
+              <div *ngIf="form.lastName.errors && form.lastName.touched">
+                <div class="error-text" *ngIf="form.lastName.errors.required">
+                  Last Name is required.
+                </div>
+                <div class="error-text" *ngIf="form.lastName.errors.pattern && !form.lastName.errors.required">
+                  Must consist of only alphabetic characters
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" formControlName="email" class="form-control">
+              <div *ngIf="form.email.errors && form.email.touched">
+                <div class="error-text" *ngIf="form.email.errors.required">
+                  Email is required.
+                </div>
+                <div class="error-text" *ngIf="form.email.errors.email && !form.email.errors.required">
+                  Invalid email.
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Username</label>
+              <input type="text" formControlName="username" class="form-control">
+              <div *ngIf="form.username.errors && form.username.touched">
+                <div class="error-text" *ngIf="form.username.errors.required">
+                  Username is required
+                </div>
+                <div class="error-text" *ngIf="form.username.errors.minlength && !form.username.errors.required">
+                  Usernames must be at least 3 characters
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Password</label>
+              <input type="password" formControlName="password" class="form-control">
+              <div *ngIf="form.password.errors && form.password.touched">
+                <div class="error-text" *ngIf="form.password.errors.requried">
+                  Password is required
+                </div>
+                <div class="error-text" *ngIf="form.password.errors.minlength && !form.password.errors.required">
+                  Passwords must be at least 3 characters
+                </div>
+              </div>
+            </div>
+            <div class="form-group text-center">
+              <button [disabled]="!registerForm.valid" class="btn btn-light">
+                Register
+                <fa-icon *ngIf="loading" [icon]="faSpinner" [spin]="true" size="sm"></fa-icon>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { BoardComponent } from './components/board/board.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
+import { AuthGuard } from './guards/auth.guard';
 
 
 const routes: Routes = [
@@ -13,12 +16,24 @@ const routes: Routes = [
   {
     path: 'board',
     pathMatch: 'full',
-    component: BoardComponent
+    component: BoardComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'profile/:id',
     pathMatch: 'full',
     component: UserProfileComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'register',
+    pathMatch: 'full',
+    component: RegisterComponent
+  },
+  {
+    path: 'login',
+    pathMatch: 'full',
+    component: LoginComponent
   }
 ];
 

@@ -1,0 +1,65 @@
+<div class="login">
+  <div class="background">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4 offset-md-4 align-middle vertical-center">
+        <div class="card managR-card">
+          <img class="managR-logo" src="assets/images/logo.png">
+          <form [formGroup]="loginForm" (ngSubmit)="submit()">
+            <div class="form-group">
+              <label>Username</label>
+              <input type="text" formControlName="username" class="form-control">
+              <div *ngIf="form.username.errors && form.username.touched">
+                <div class="error-text" *ngIf="form.username.errors.required">
+                  Username is required
+                </div>
+                <div class="error-text" *ngIf="form.username.errors.minlength && !form.username.errors.required">
+                  Usernames must be at least 3 characters
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Password</label>
+              <input type="password" formControlName="password" class="form-control">
+              <div *ngIf="form.password.errors && form.password.touched">
+                <div class="error-text" *ngIf="form.password.errors.requried">
+                  Password is required
+                </div>
+                <div class="error-text" *ngIf="form.password.errors.minlength && !form.password.errors.required">
+                  Passwords must be at least 3 characters
+                </div>
+              </div>
+            </div>
+            <div class="form-group text-center">
+                <button [disabled]="!loginForm.valid" class="btn btn-light">
+                  Log In
+                  <fa-icon *ngIf="loading" [icon]="faSpinner" [spin]="true" size="sm"></fa-icon>
+                </button>
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
