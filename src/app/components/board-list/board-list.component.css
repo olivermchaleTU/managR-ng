@@ -25,7 +25,6 @@
     vertical-align: top;
     border-radius: 5px;
     margin-top: 10px;
-
   }
   
   .story-title {
@@ -62,6 +61,10 @@
     display: block;
   }
   
+  .drag-notify {
+    background: #dcddde;
+  }
+
   .status-heading{
     font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 16px;
@@ -145,4 +148,8 @@
 
   .bring-up {
     margin-top: -15px;
+  }
+
+  .list-heading {
+    height: 100%
   }

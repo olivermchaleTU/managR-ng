@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <hr/>
+  <hr />
   <div class="row">
     <div class="col-md-12">
       <div class="story-container">
@@ -21,11 +21,12 @@
           <div cdkDropList id="todo" #todoList="cdkDropList" [cdkDropListData]="story.tasks.todo"
             [cdkDropListConnectedTo]="[progressList, doneList, blockedList]" class="item-list"
             (cdkDropListDropped)="itemDropped($event)" (cdkDropListEntered)="dropListEntered($event)"
-            (cdkDropListExited)="dropListExited($event)">
+            (cdkDropListExited)="dropListExited($event)" [class.drag-notify]="dragging">
             <!-- <div class="tasks-container" *ngFor="let task of story.tasks.todo">
               <app-board-task cdkDrag [task]="task"></app-board-task>
             </div> -->
-            <div class="item-box" *ngFor="let item of story.tasks.todo" [ngClass]="getStatusClass(item)" cdkDrag>
+            <div class="item-box" (cdkDragStarted)="dragging = true;" (cdkDragEnded)="dragging = false"
+              *ngFor="let item of story.tasks.todo" [ngClass]="getStatusClass(item)" cdkDrag>
               <strong>{{item.title}}</strong>
               <p>{{item.description}}</p>
             </div>
@@ -40,8 +41,9 @@
           <div cdkDropList id="progress" #progressList="cdkDropList" [cdkDropListData]="story.tasks.inProgress"
             [cdkDropListConnectedTo]="[todoList, doneList, blockedList]" class="item-list"
             (cdkDropListDropped)="itemDropped($event)" (cdkDropListEntered)="dropListEntered($event)"
-            (cdkDropListExited)="dropListExited($event)">
-            <div class="item-box" *ngFor="let item of story.tasks.inProgress" [ngClass]="getStatusClass(item)" cdkDrag>
+            (cdkDropListExited)="dropListExited($event)" [class.drag-notify]="dragging">
+            <div class="item-box" (cdkDragStarted)="dragging = true;" (cdkDragEnded)="dragging = false"
+              *ngFor="let item of story.tasks.inProgress" [ngClass]="getStatusClass(item)" cdkDrag>
               <strong>{{item.title}}</strong>
               <p>{{item.description}}</p>
             </div>
@@ -56,8 +58,9 @@
           <div cdkDropList id="done" #doneList="cdkDropList" [cdkDropListData]="story.tasks.done"
             [cdkDropListConnectedTo]="[todoList, progressList, blockedList]" class="item-list"
             (cdkDropListDropped)="itemDropped($event)" (cdkDropListEntered)="dropListEntered($event)"
-            (cdkDropListExited)="dropListExited($event)">
-            <div class="item-box" *ngFor="let item of story.tasks.done" [ngClass]="getStatusClass(item)" cdkDrag>
+            (cdkDropListExited)="dropListExited($event)" [class.drag-notify]="dragging">
+            <div class="item-box" (cdkDragStarted)="dragging = true;" (cdkDragEnded)="dragging = false"
+              *ngFor="let item of story.tasks.done" [ngClass]="getStatusClass(item)" cdkDrag>
               <strong>{{item.title}}</strong>
               <p>{{item.description}}</p>
             </div>
@@ -72,8 +75,9 @@
           <div cdkDropList id="blocked" #blockedList="cdkDropList" [cdkDropListData]="story.tasks.blocked"
             [cdkDropListConnectedTo]="[todoList, progressList, doneList]" class="item-list"
             (cdkDropListDropped)="itemDropped($event)" (cdkDropListEntered)="dropListEntered($event)"
-            (cdkDropListExited)="dropListExited($event)">
-            <div class="item-box" *ngFor="let item of story.tasks.blocked" [ngClass]="getStatusClass(item)" cdkDrag>
+            (cdkDropListExited)="dropListExited($event)" [class.drag-notify]="dragging">
+            <div class="item-box" (cdkDragStarted)="dragging = true;" (cdkDragEnded)="dragging = false"
+              *ngFor="let item of story.tasks.blocked" [ngClass]="getStatusClass(item)" cdkDrag>
               <strong>{{item.title}}</strong>
               <p>{{item.description}}</p>
             </div>
@@ -82,5 +86,5 @@
       </div>
     </div>
   </div>
-  <hr/>
+  <hr />
 </div>

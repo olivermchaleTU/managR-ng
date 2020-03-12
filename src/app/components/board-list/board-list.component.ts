@@ -12,6 +12,7 @@ export class BoardListComponent implements OnInit {
 
   @Input() story: BoardStory;
   tasksVisible = true;
+  dragging = false;
   faEye: IconDefinition = faEye;
   faEyeSlash: IconDefinition = faEyeSlash;
 

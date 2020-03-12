@@ -13,12 +13,11 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-  isLoggedIn = false;
   private authBaseUrl = `${environment.authServiceBaseUrl}`;
   constructor(
     private http: HttpClient,
     private router: Router
-    ) { }
+  ) { }
 
   register(registrationInfo: RegisterModel): Observable<any> {
     return this.http.post<RegisterModel>(`${this.authBaseUrl}/auth/register`, registrationInfo);
@@ -34,18 +33,16 @@ export class AuthService {
   }
 
   isAuthenticated() {
-    if (this.isLoggedIn) {
-      const expiryEpoch = localStorage.getItem('currentTokenExpiry');
-      // multiply our epoch by 1000 to get milliseconds to create a new date using our epoch date
-      const expiryDate = new Date(Number(expiryEpoch) * 1000);
-      if (expiryDate > new Date()) {
-        return true;
-      }
+    const expiryEpoch = localStorage.getItem('currentTokenExpiry');
+    // multiply our epoch by 1000 to get milliseconds to create a new date using our epoch date
+    const expiryDate = new Date(Number(expiryEpoch) * 1000);
+    if (expiryDate > new Date()) {
+      return true;
     }
     return false;
   }
 
-  private handleError<T> (operation = 'operation', result?: T) {
+  private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
       return of(result as T);
