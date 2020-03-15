@@ -54,7 +54,6 @@ export class LoginComponent implements OnInit {
 
   handleLoginSuccess(resp: any) {
     this.loading = false;
-    this.authService.isLoggedIn = true;
     this.authService.setTokenInfo(resp.access_token);
     this.router.navigate(['/board']);
   }
