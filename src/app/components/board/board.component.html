@@ -1,9 +1,4 @@
-<div class="board-toolbar">
-    <p class="toolbar-action">
-        <fa-icon [icon]="faPlus"></fa-icon>
-        Create Story
-    </p>
-</div>
+<app-board-toolbar></app-board-toolbar>
 <div class="center mt" *ngIf="!boardResponse">
     <fa-icon [icon]="faSpinner" [spin]="true" size="lg"></fa-icon>
 </div>

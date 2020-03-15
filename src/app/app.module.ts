@@ -18,6 +18,10 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthService } from './services/auth/auth.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ModalComponent } from './components/modal/modal.component';
+import { BoardToolbarComponent } from './components/board-toolbar/board-toolbar.component';
+import { ModalService } from './services/modal/modal.service';
+import { CreateAgileItemComponent } from './components/create-agile-item/create-agile-item.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +31,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     TopNavComponent,
     UserProfileComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ModalComponent,
+    BoardToolbarComponent,
+    CreateAgileItemComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +48,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   providers: [
     BoardService,
-    AuthService
+    AuthService,
+    ModalService
   ],
   bootstrap: [AppComponent]
 })
