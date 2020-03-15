@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BoardService } from 'src/app/services/board/board.service';
 import { BoardResponse, BoardStory } from 'src/app/utils/types/BoardTypes';
-import { faSpinner, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { faSpinner, faPlus, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-board',
@@ -13,6 +13,7 @@ export class BoardComponent implements OnInit {
   stories: BoardStory[];
   boardResponse = false;
   faSpinner: IconDefinition = faSpinner;
+  faPlus: IconDefinition = faPlus;
 
   constructor(
     private boardService: BoardService
