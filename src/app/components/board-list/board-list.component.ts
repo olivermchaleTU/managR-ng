@@ -22,9 +22,6 @@ export class BoardListComponent implements OnInit {
   }
 
   itemDropped($event: CdkDragDrop<string[]>) {
-
-    this.dropListExited($event);
-
     if ($event.previousContainer === $event.container) {
       moveItemInArray($event.container.data, $event.previousIndex, $event.currentIndex);
     } else {
@@ -33,40 +30,6 @@ export class BoardListComponent implements OnInit {
                         $event.previousIndex,
                         $event.currentIndex);
     }
-  }
-
-  dropListEntered($event: CdkDragEnter) {
-    console.log('entered');
-    // switch ($event.container.id) {
-    //   case 'todo':
-    //       this.story.todo.dragged = true;
-    //       break;
-    //   case 'progress':
-    //       this.progress.dragged = true;
-    //       break;
-    //   case 'done':
-    //       this.done.dragged = true;
-    //       break;
-    //   default:
-    //       break;
-    // }
-  }
-
-  dropListExited($event: CdkDragExit) {
-    console.log('exited');
-    // switch ($event.container.id) {
-    //   case 'todo':
-    //       this.todo.dragged = false;
-    //       break;
-    //   case 'progress':
-    //       this.progress.dragged = false;
-    //       break;
-    //   case 'done':
-    //       this.done.dragged = false;
-    //       break;
-    //   default:
-    //       break;
-    // }
   }
 
   getStatusClass(item: BoardTask) {
@@ -81,6 +44,32 @@ export class BoardListComponent implements OnInit {
         return 'border-green';
       default:
         return 'border-purple';
+    }
+  }
+
+  getPriorityTag(item: BoardTask) {
+    switch (item.priority) {
+      case 0:
+        return 'Low';
+      case 1:
+        return 'Medium';
+      case 2:
+        return 'High';
+      default:
+        return 'Unknown';
+    }
+  }
+
+  getPriorityClass(item: BoardTask) {
+    switch (item.priority) {
+      case 0:
+        return 'badge-green';
+      case 1:
+        return 'badge-orange';
+      case 2:
+        return 'badge-red';
+      default:
+        return 'badge-purple';
     }
   }
 

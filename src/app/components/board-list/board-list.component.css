@@ -146,6 +146,27 @@
     border-bottom: 6px solid #a4cf30;
   }
 
+  .badge {
+    width: fit-content;
+    color: white;
+  }
+
+  .badge-green {
+    background-color: #a4cf30;;
+  }
+
+  .badge-orange {
+    background-color: #eec300;;
+  }
+
+  .badge-red {
+    background-color: #e8384f;;
+  }
+
+  .badge-purple {
+    background-color: #aa62e3;;
+  }
+
   .bring-up {
     margin-top: -15px;
   }
