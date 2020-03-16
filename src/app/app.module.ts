@@ -22,7 +22,8 @@ import { ModalComponent } from './components/modal/modal.component';
 import { BoardToolbarComponent } from './components/board-toolbar/board-toolbar.component';
 import { ModalService } from './services/modal/modal.service';
 import { CreateAgileItemComponent } from './components/create-agile-item/create-agile-item.component';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ValidationService } from './services/validation/validation.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,12 +45,14 @@ import { CreateAgileItemComponent } from './components/create-agile-item/create-
     NgPersonModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     FontAwesomeModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
   ],
   providers: [
     BoardService,
     AuthService,
-    ModalService
+    ModalService,
+    ValidationService
   ],
   bootstrap: [AppComponent]
 })
