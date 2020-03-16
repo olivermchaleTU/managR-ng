@@ -5,6 +5,10 @@ import { IconDefinition, faSpinner, faCalendar } from '@fortawesome/free-solid-s
 import { ValidationService } from 'src/app/services/validation/validation.service';
 import { BoardService } from 'src/app/services/board/board.service';
 import { BoardName } from 'src/app/utils/types/BoardTypes';
+import { UsersService } from 'src/app/services/users/users.service';
+import { UserShort } from 'src/app/utils/types/AuthTypes';
+import { Observable, of } from 'rxjs';
+import { debounceTime, distinctUntilChanged, tap, switchMap, catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-create-agile-item',
@@ -15,9 +19,13 @@ export class CreateAgileItemComponent implements OnInit {
 
   createItemForm: FormGroup;
   model;
+  userModel;
   boards: BoardName[];
+  users: UserShort[];
   loading = true;
-  networkError = false;
+  searching = false;
+  boardError = false;
+  usersError = false;
   faSpinner: IconDefinition = faSpinner;
   faCalendar: IconDefinition = faCalendar;
   itemTypes = [
@@ -53,7 +61,8 @@ export class CreateAgileItemComponent implements OnInit {
     private modalService: ModalService,
     private validationService: ValidationService,
     private formBuilder: FormBuilder,
-    private boardService: BoardService
+    private boardService: BoardService,
+    private usersService: UsersService
   ) { }
 
   ngOnInit() {
@@ -73,9 +82,9 @@ export class CreateAgileItemComponent implements OnInit {
       },
       err => {
         this.loading = false;
-        this.networkError = true;
+        this.boardError = true;
       }
-    )
+    );
   }
 
   initialiseForm() {
@@ -86,12 +95,27 @@ export class CreateAgileItemComponent implements OnInit {
       dueBy: ['', [Validators.required, this.validationService.dateValidator]],
       priority: ['', [Validators.required]],
       board: ['', [Validators.required]],
+      assignee: ['', [Validators.required]]
     });
   }
 
-  log(board) {
-    console.log(board);
-  }
+  searchForUser = (text$: Observable<string>) =>
+  text$.pipe(
+    debounceTime(300),
+    distinctUntilChanged(),
+    tap(() => this.searching = true),
+    switchMap(term =>
+      this.usersService.searchUsers(term).pipe(
+        tap(() => this.usersError = false),
+        catchError(() => {
+          this.usersError = true;
+          return of([]);
+        }))
+    ),
+    tap(() => this.searching = false)
+  )
+
+  userResultFormatter = (x: {name: string}) => x.name;
 
   setModalVisbility(visible: boolean) {
     this.modalService.setVisibilityStatus(visible);
