@@ -3,13 +3,14 @@
     Create Item
   </div>
   <div class="app-modal-body">
-    <div class="form-container">
+    <div class="form-container" *ngIf="formRendered">
       <form [formGroup]="createItemForm" (ngSubmit)="submit()">
         <div class="form-group">
           <label for="itemType">
             Item Type
           </label>
-          <select class="form-control" formControlName="itemType" id="itemType">
+          <select class="form-control" formControlName="itemType"
+            id="itemType" [value]="'hi'" (change)="typeSelected($event)">
             <option *ngFor="let type of itemTypes" [value]="type.value">
               {{type.text}}
             </option>
@@ -35,21 +36,22 @@
           </label>
           <textarea class="form-control" id="description" formControlName="description">
           </textarea>
-            <div *ngIf="form.description.errors && form.description.touched">
-              <div *ngIf="form.description.errors.required">
-                Description is required
-              </div>
-              <div *ngIf="form.description.errors.minlength && !form.description.errors.required">
-                Description must have a minimum length of 3
-              </div>
+          <div *ngIf="form.description.errors && form.description.touched">
+            <div *ngIf="form.description.errors.required">
+              Description is required
             </div>
+            <div *ngIf="form.description.errors.minlength && !form.description.errors.required">
+              Description must have a minimum length of 3
+            </div>
+          </div>
         </div>
         <div class="form-group">
           <label for="dueBy">
             Due By
             <fa-icon (click)="d.toggle()" class="fa-icon" [icon]="faCalendar"></fa-icon>
           </label>
-          <input class="form-control" type="text" placeholder="YYYY-MM-DD" formControlName="dueBy" ngbDatepicker #d="ngbDatepicker"/>
+          <input class="form-control" type="text" placeholder="YYYY-MM-DD" formControlName="dueBy" ngbDatepicker
+            #d="ngbDatepicker" />
           <div *ngIf="form.dueBy.errors && form.dueBy.touched">
             <div *ngIf="form.dueBy.errors.required">
               Due by date is required
@@ -74,21 +76,65 @@
             Board
           </label>
           <select class="form-control" formControlName="board" id="board">
-              <option *ngFor="let board of boards" [value]="board.id">
-                {{board.boardName}}
-              </option>
+            <option *ngFor="let board of boards" [value]="board.id">
+              {{board.boardName}}
+            </option>
           </select>
         </div>
         <div class="form-group">
           <label for="assingee">
             Assignee
           </label>
-          <input id="assignee" type="text" formControlName="assignee" class="form-control" 
-            [resultTemplate]="assigneeSelect" [inputFormatter]="userResultFormatter"
+          <input id="assignee" type="text" formControlName="assignee" class="form-control"
+            [resultTemplate]="assigneeSelect" [inputFormatter]="userResultFormatter" [editable]='false'
             [(ngModel)]="userModel" [ngbTypeahead]="searchForUser" placeholder="Search for Assignee">
-            <ng-template let-r="result" let-t="term" #assigneeSelect>
-              <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
+          <ng-template let-r="result" let-t="term" #assigneeSelect>
+            <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
+          </ng-template>
+        </div>
+        <div *ngIf="selectedItemType === 1">
+          <div class="form-group">
+            <label for="superStory">
+              Super Story
+            </label>
+            <input id="superStory" type="text" formControlName="superStory" class="form-control"
+              [resultTemplate]="superStorySelect" [inputFormatter]="agileItemResultFormatter" [editable]='false'
+              [(ngModel)]="superStoryModel" [ngbTypeahead]="searchForAgileItem" placeholder="Search for Super Story">
+            <ng-template let-r="result" let-t="term" #superStorySelect>
+              <ngb-highlight [result]="r.title" [term]="t"></ngb-highlight>
             </ng-template>
+          </div>
+          <div class="form-group">
+            <label for="storyPoints">
+              Story Points
+            </label>
+            <input id="storyPoints" type="number" formControlName="storyPoints" class="form-control">
+          </div>
+        </div>
+        <div *ngIf="selectedItemType === 2">
+          <div class="form-group">
+            <label for="story">
+              Story
+            </label>
+            <input id="story" type="text" formControlName="story" class="form-control"
+              [resultTemplate]="storySelect" [inputFormatter]="agileItemResultFormatter" [editable]='false'
+              [(ngModel)]="superStoryModel" [ngbTypeahead]="searchForAgileItem" placeholder="Search for Story">
+            <ng-template let-r="result" let-t="term" #storySelect>
+              <ngb-highlight [result]="r.title" [term]="t"></ngb-highlight>
+            </ng-template>
+          </div>
+          <div class="form-group">
+            <label for="order">
+              Task Order
+            </label>
+            <input id="order" type="number" formControlName="order" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="estimatedTime">
+              Estimated Time (hours)
+            </label>
+            <input id="estimatedTime" type="number" formControlName="estimatedTime" class="form-control">
+          </div>
         </div>
       </form>
     </div>

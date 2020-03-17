@@ -25,6 +25,7 @@ import { CreateAgileItemComponent } from './components/create-agile-item/create-
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ValidationService } from './services/validation/validation.service';
 import { UsersService } from './services/users/users.service';
+import { AgileItemsService } from './services/agile-items/agile-items.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,7 +55,8 @@ import { UsersService } from './services/users/users.service';
     AuthService,
     ModalService,
     ValidationService,
-    UsersService
+    UsersService,
+    AgileItemsService
   ],
   bootstrap: [AppComponent]
 })

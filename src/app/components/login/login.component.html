@@ -29,7 +29,7 @@
           <form [formGroup]="loginForm" (ngSubmit)="submit()">
             <div class="form-group">
               <label>Username</label>
-              <input type="text" formControlName="username" class="form-control">
+              <input type="text" autofocus=true formControlName="username" class="form-control">
               <div *ngIf="form.username.errors && form.username.touched">
                 <div class="error-text" *ngIf="form.username.errors.required">
                   Username is required
