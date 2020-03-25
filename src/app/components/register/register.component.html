@@ -31,7 +31,7 @@
               <label>
                 First Name
               </label>
-              <input type="text" formControlName="firstName" class="form-control" />
+              <input type="text" autofocus=true formControlName="firstName" class="form-control" />
               <div *ngIf="form.firstName.errors && form.firstName.touched">
                 <div class="error-text" *ngIf="form.firstName.errors.required">
                   First Name is required.

@@ -18,7 +18,14 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthService } from './services/auth/auth.service';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { ModalComponent } from './components/modal/modal.component';
+import { BoardToolbarComponent } from './components/board-toolbar/board-toolbar.component';
+import { ModalService } from './services/modal/modal.service';
+import { CreateAgileItemComponent } from './components/create-agile-item/create-agile-item.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ValidationService } from './services/validation/validation.service';
+import { UsersService } from './services/users/users.service';
+import { AgileItemsService } from './services/agile-items/agile-items.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +34,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     TopNavComponent,
     UserProfileComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ModalComponent,
+    BoardToolbarComponent,
+    CreateAgileItemComponent
   ],
   imports: [
     BrowserModule,
@@ -37,11 +47,16 @@ import { ReactiveFormsModule } from '@angular/forms';
     NgPersonModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     FontAwesomeModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
   ],
   providers: [
     BoardService,
-    AuthService
+    AuthService,
+    ModalService,
+    ValidationService,
+    UsersService,
+    AgileItemsService
   ],
   bootstrap: [AppComponent]
 })

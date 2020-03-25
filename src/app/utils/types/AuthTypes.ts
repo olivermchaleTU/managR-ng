@@ -18,3 +18,8 @@ export class LoginModel {
     username: string;
     password: string;
 }
+
+export class UserShort {
+    id: string;
+    name: string;
+}

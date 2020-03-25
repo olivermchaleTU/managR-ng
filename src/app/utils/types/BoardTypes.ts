@@ -27,3 +27,12 @@ export class BoardTask {
 export class BoardResponse {
     stories: BoardStory[];
 }
+
+export class BoardName {
+    id: string;
+    boardName: string;
+}
+
+export class BoardNameList {
+    boardNames: BoardName[];
+}

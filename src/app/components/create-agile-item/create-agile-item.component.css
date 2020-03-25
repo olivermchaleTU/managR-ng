@@ -1,0 +1,25 @@
+.modal-heading{
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: left;
+}
+
+.fa-icon:hover {
+    cursor: pointer;
+    transform: scale(2);
+}
+
+.badge-red {
+    background-color: #e8384f;;
+}
+
+/* Necessary to fix ng-bootstrap style issue */
+.dropdown-menu {
+    transform: none !important;
+    top: auto !important;
+    position: absolute !important;
+    left: auto !important;
+    will-change: auto !important;
+}
+

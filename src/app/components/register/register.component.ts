@@ -71,21 +71,12 @@ export class RegisterComponent implements OnInit {
   }
 
   handleRegisterFailure() {
-    // this.loading = false;
-    // Swal.fire({
-    //   title: 'Registration Failed!',
-    //   text: 'Account failed to create',
-    //   icon: 'error',
-    //   confirmButtonText: 'Ok',
-    // });
     this.loading = false;
     Swal.fire({
-      title: 'Registration successful!',
-      text: 'Account successfully created',
-      icon: 'success',
-      confirmButtonText: 'Log In',
-    }).then((login) => {
-      this.navigateToLogin();
+      title: 'Registration Failed!',
+      text: 'Account failed to create',
+      icon: 'error',
+      confirmButtonText: 'Ok',
     });
   }
 
