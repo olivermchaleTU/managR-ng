@@ -2,7 +2,7 @@
   <div class="app-modal-header modal-heading">
     Create Item
   </div>
-  <div class="app-modal-body">
+  <div class="app-modal-body" id="modal-body">
     <div class="form-container" *ngIf="formRendered">
       <form [formGroup]="createItemForm" (ngSubmit)="submit()">
         <div class="form-group">
@@ -70,6 +70,11 @@
               {{type.text}}
             </option>
           </select>
+          <div *ngIf="form.priority.errors && form.priority.touched">
+            <div *ngIf="form.priority.errors.required">
+              Priority is required
+            </div>
+          </div>
         </div>
         <div class="form-group">
           <label for="board">
@@ -80,6 +85,11 @@
               {{board.boardName}}
             </option>
           </select>
+          <div *ngIf="form.board.errors && form.board.touched">
+            <div *ngIf="form.board.errors.required">
+              Board is required
+            </div>
+          </div>
         </div>
         <div class="form-group">
           <label for="assingee">
@@ -91,6 +101,11 @@
           <ng-template let-r="result" let-t="term" #assigneeSelect>
             <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
           </ng-template>
+          <div *ngIf="form.assignee.errors && form.assignee.touched">
+            <div *ngIf="form.assignee.errors.required">
+              Assignee is required
+            </div>
+          </div>
         </div>
         <div *ngIf="selectedItemType === 1">
           <div class="form-group">
@@ -103,12 +118,25 @@
             <ng-template let-r="result" let-t="term" #superStorySelect>
               <ngb-highlight [result]="r.title" [term]="t"></ngb-highlight>
             </ng-template>
+            <div *ngIf="form.superStory.errors && form.superStory.touched">
+              <div *ngIf="form.superStory.errors.required">
+                Super story is required
+              </div>
+            </div>
           </div>
           <div class="form-group">
             <label for="storyPoints">
               Story Points
             </label>
             <input id="storyPoints" type="number" formControlName="storyPoints" class="form-control">
+            <div *ngIf="form.storyPoints.errors && form.storyPoints.touched">
+              <div *ngIf="form.storyPoints.errors.required">
+                Story points is required
+              </div>
+              <div *ngIf="form.storyPoints.errors.pattern">
+                Invalid story points value, must be a positive number
+              </div>
+            </div>
           </div>
         </div>
         <div *ngIf="selectedItemType === 2">
@@ -117,23 +145,50 @@
               Story
             </label>
             <input id="story" type="text" formControlName="story" class="form-control"
-              [resultTemplate]="storySelect" [inputFormatter]="agileItemResultFormatter" [editable]='false'
+              [resultTemplate]="storySelect" (change)="setOrderValidator($event.target.value)" [inputFormatter]="agileItemResultFormatter" [editable]='false'
               [(ngModel)]="superStoryModel" [ngbTypeahead]="searchForAgileItem" placeholder="Search for Story">
             <ng-template let-r="result" let-t="term" #storySelect>
               <ngb-highlight [result]="r.title" [term]="t"></ngb-highlight>
             </ng-template>
+            <div *ngIf="form.story.errors && form.story.touched">
+              <div *ngIf="form.story.errors.required">
+                Story is required
+              </div>
+            </div>
           </div>
           <div class="form-group">
             <label for="order">
               Task Order
             </label>
-            <input id="order" type="number" formControlName="order" class="form-control">
+            <input id="order" placeholder="{{getOrderPlaceholder()}}" type="number" formControlName="order" class="form-control">
+            <div *ngIf="form.order.errors && form.order.touched">
+              <div *ngIf="form.order.errors.required">
+                Order is required
+              </div>
+              <div *ngIf="form.order.errors.pattern">
+                Invalid Order value, must be a whole positive number
+              </div>
+              <div *ngIf="form.order.errors.min">
+                Order cannot be smaller than existing task order
+              </div>
+              <div *ngIf="form.order.errors.max">
+                Order cannot be more than 1 greater than current order value
+              </div>
+            </div>
           </div>
           <div class="form-group">
             <label for="estimatedTime">
               Estimated Time (hours)
             </label>
             <input id="estimatedTime" type="number" formControlName="estimatedTime" class="form-control">
+            <div *ngIf="form.estimatedTime.errors && form.estimatedTime.touched">
+              <div *ngIf="form.estimatedTime.errors.required">
+                Estimated Time is required
+              </div>
+              <div *ngIf="form.estimatedTime.errors.pattern">
+                Invalid Estimated Time value, must be a positive whole number
+              </div>
+            </div>
           </div>
         </div>
       </form>
@@ -141,6 +196,13 @@
   </div>
   <div class="app-modal-footer">
     <button type="button" class="btn btn-default" (click)="setModalVisbility(false)">Close</button>
-    <button type="button" class="btn btn-primary">Save changes</button>
+    <button type="button" class="btn btn-primary" (click)="submit()" [disabled]="!createItemForm.valid">
+      <div *ngIf="!creating">
+        Create
+      </div>
+      <div *ngIf="creating">
+        <fa-icon [icon]="faSpinner" [spin]="true">Creating...</fa-icon>
+      </div>
+    </button>
   </div>
 </app-modal>

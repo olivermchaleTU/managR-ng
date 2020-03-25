@@ -13,3 +13,13 @@
 .badge-red {
     background-color: #e8384f;;
 }
+
+/* Necessary to fix ng-bootstrap style issue */
+.dropdown-menu {
+    transform: none !important;
+    top: auto !important;
+    position: absolute !important;
+    left: auto !important;
+    will-change: auto !important;
+}
+
