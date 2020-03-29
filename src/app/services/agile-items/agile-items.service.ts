@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { AgileItemShort, CreateAgileItem } from 'src/app/utils/types/AgileItemTypes';
 import { map } from 'rxjs/operators';
 import { Subject, Observable } from 'rxjs';
+import { BoardTask } from 'src/app/utils/types/BoardTypes';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,10 @@ export class AgileItemsService {
 
   createAgileItem(itemDetails: CreateAgileItem) {
     return this.http.post<CreateAgileItem>(`${this.baseUrl}agileItems/createAgileItem`, itemDetails);
+  }
+
+  updateAgileItem(item: BoardTask) {
+    return this.http.post<BoardTask>(`${this.baseUrl}agileItems/updateAgileItem`, item);
   }
 
   // Emits when a story has been created

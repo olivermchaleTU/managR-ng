@@ -34,7 +34,7 @@
       <div class="drag-container">
         <div class="list-heading text-center">
           <div class="status-heading">In Progress</div>
-          <div cdkDropList id="progress" #progressList="cdkDropList" [cdkDropListData]="story.tasks.inProgress"
+          <div cdkDropList id="inProgress" #progressList="cdkDropList" [cdkDropListData]="story.tasks.inProgress"
             [cdkDropListConnectedTo]="[todoList, doneList, blockedList]" class="item-list"
             (cdkDropListDropped)="itemDropped($event)" [class.drag-notify]="dragging">
             <div class="item-box" (cdkDragStarted)="dragging = true;" (cdkDragEnded)="dragging = false"

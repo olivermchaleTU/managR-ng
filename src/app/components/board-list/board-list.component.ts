@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { BoardStory, BoardTask } from 'src/app/utils/types/BoardTypes';
 import { moveItemInArray, CdkDragDrop, transferArrayItem, CdkDragEnter, CdkDragExit } from '@angular/cdk/drag-drop';
 import { faEye, faEyeSlash, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { AgileItemsService } from 'src/app/services/agile-items/agile-items.service';
 
 @Component({
   selector: 'app-board-list',
@@ -16,12 +17,14 @@ export class BoardListComponent implements OnInit {
   faEye: IconDefinition = faEye;
   faEyeSlash: IconDefinition = faEyeSlash;
 
-  constructor() { }
+  constructor(
+    private agileItemsService: AgileItemsService
+  ) { }
 
   ngOnInit() {
   }
 
-  itemDropped($event: CdkDragDrop<string[]>) {
+  itemDropped($event: CdkDragDrop<BoardTask[]>) {
     if ($event.previousContainer === $event.container) {
       moveItemInArray($event.container.data, $event.previousIndex, $event.currentIndex);
     } else {
@@ -29,7 +32,38 @@ export class BoardListComponent implements OnInit {
                         $event.container.data,
                         $event.previousIndex,
                         $event.currentIndex);
+
+      this.updateStatusStyling($event);
     }
+  }
+
+  updateStatusStyling($event: CdkDragDrop<BoardTask[]>) {
+    const status = ($event.container.id);
+    const movedItem = this.story.tasks[status][$event.currentIndex];
+    switch (status) {
+      case 'todo':
+        movedItem.status = 0;
+        break;
+      case 'inProgress':
+        movedItem.status = 1;
+        break;
+      case 'blocked':
+        movedItem.status = 2;
+        break;
+      case 'done':
+        movedItem.status = 3;
+    }
+    this.updateAgileItem(movedItem);
+  }
+
+  updateAgileItem(movedItem: BoardTask) {
+    this.agileItemsService.updateAgileItem(movedItem).subscribe(
+    resp => {
+      console.log('success' + resp);
+    },
+    err => {
+      console.log('err' + err);
+    });
   }
 
   getStatusClass(item: BoardTask) {
