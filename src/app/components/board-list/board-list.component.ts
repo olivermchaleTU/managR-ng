@@ -3,6 +3,7 @@ import { BoardStory, BoardTask } from 'src/app/utils/types/BoardTypes';
 import { moveItemInArray, CdkDragDrop, transferArrayItem, CdkDragEnter, CdkDragExit } from '@angular/cdk/drag-drop';
 import { faEye, faEyeSlash, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { AgileItemsService } from 'src/app/services/agile-items/agile-items.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-board-list',
@@ -18,7 +19,8 @@ export class BoardListComponent implements OnInit {
   faEyeSlash: IconDefinition = faEyeSlash;
 
   constructor(
-    private agileItemsService: AgileItemsService
+    private agileItemsService: AgileItemsService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -109,6 +111,10 @@ export class BoardListComponent implements OnInit {
 
   toggleStoryVisiblity() {
     this.tasksVisible = !this.tasksVisible;
+  }
+
+  navigateToItem(item: BoardTask) {
+    this.router.navigate(['/details', item.id]);
   }
 
 }

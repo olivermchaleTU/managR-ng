@@ -25,3 +25,24 @@ export class CreateAgileItem {
     order?: number;
     estimatedTime?: number;
 }
+
+export class AgileItem {
+    id: string;
+    agileItemType: number;
+    title: string;
+    description: string;
+    createdOn: Date;
+    dueBy: Date;
+    priority: number;
+    board: string;
+    assigneeId: string;
+    createdBy: string;
+    assigneeName: string;
+    parentId?: string;
+    parentTitle: string;
+    storyPoints?: number;
+    story?: string;
+    order?: number;
+    estimatedTime?: number;
+    loggedTime?: number;
+}

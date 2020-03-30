@@ -1,0 +1,26 @@
+<div class="center mt" *ngIf="loading">
+  <fa-icon [icon]="faSpinner" [spin]="true" size="lg"></fa-icon>
+</div>
+<div *ngIf="!loading">
+  <div class="container-fluid pt">
+    <div class="row">
+      <div class="title-box">
+        <div *ngIf="item.agileItemType !== 0"  class="parent-title">
+          <a [routerLink]="['/details', item.parentId]">{{item.parentTitle}}</a>
+          <fa-icon [icon]="faChevronRight" class="fa-chevron"></fa-icon>
+        </div>
+        <div class="title">
+          <p class="title-text">
+            {{item.title}}
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        
+      </div>
+    </div>
+  </div>
+
+</div>

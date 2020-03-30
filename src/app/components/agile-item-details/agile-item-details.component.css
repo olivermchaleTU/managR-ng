@@ -1,0 +1,33 @@
+.center {
+    align-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.mt {
+    margin-top: 20px;
+}
+
+.pt {
+    padding-top: 20px;
+}
+
+.container-fluid {
+    margin-right: 5px;
+    margin-left: 5px;
+    background-color: #f6f8f9;
+    height: 100%;
+}
+
+.fa-chevron {
+    padding-left: 8px;
+    padding-right: 8px;
+    color: #007bff;
+}
+
+.title-box, .parent-title, .title {
+    display: inline-block;
+    font-size: large;
+    font-weight: bold;
+}
+

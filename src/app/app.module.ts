@@ -26,6 +26,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ValidationService } from './services/validation/validation.service';
 import { UsersService } from './services/users/users.service';
 import { AgileItemsService } from './services/agile-items/agile-items.service';
+import { AgileItemDetailsComponent } from './components/agile-item-details/agile-item-details.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +38,8 @@ import { AgileItemsService } from './services/agile-items/agile-items.service';
     RegisterComponent,
     ModalComponent,
     BoardToolbarComponent,
-    CreateAgileItemComponent
+    CreateAgileItemComponent,
+    AgileItemDetailsComponent
   ],
   imports: [
     BrowserModule,
