@@ -5,6 +5,7 @@ import { AgileItemsService } from 'src/app/services/agile-items/agile-items.serv
 import Swal from 'sweetalert2';
 import { IconDefinition, faSpinner, faChevronRight, } from '@fortawesome/free-solid-svg-icons';
 import { AgileItem } from 'src/app/utils/types/AgileItemTypes';
+import { ItemUtilityService } from 'src/app/services/item-utility/item-utility.service';
 
 @Component({
   selector: 'app-agile-item-details',
@@ -23,7 +24,8 @@ export class AgileItemDetailsComponent implements OnInit, OnDestroy {
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private agileItemsService: AgileItemsService
+    private agileItemsService: AgileItemsService,
+    private itemUtilityService: ItemUtilityService
     ) { }
 
   ngOnInit() {
@@ -63,6 +65,22 @@ export class AgileItemDetailsComponent implements OnInit, OnDestroy {
     if (this.$agileItemDetails) {
       this.$agileItemDetails.unsubscribe();
     }
+  }
+
+  getStatusClass(status: number, isBadge = true) {
+    return this.itemUtilityService.getStatusClass(status, isBadge);
+  }
+
+  getStatusText(status: number) {
+    return this.itemUtilityService.getStatusText(status);
+  }
+
+  getPriorityClass(priority: number) {
+    return this.itemUtilityService.getPriorityClass(priority);
+  }
+
+  getPriorityTag(priority: number) {
+    return this.itemUtilityService.getPriorityTag(priority);
   }
 
 }

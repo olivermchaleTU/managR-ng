@@ -31,3 +31,49 @@
     font-weight: bold;
 }
 
+.badge-green {
+    background-color: #a4cf30;;
+}
+
+.badge-orange {
+    background-color: #eec300;;
+}
+
+.badge-red {
+    background-color: #e8384f;;
+}
+
+.badge-purple {
+    background-color: #aa62e3;;
+}
+
+.badge {
+    width: fit-content;
+    color: white;
+}
+
+label {
+    font-weight: bolder;
+    display: block;
+}
+
+.item-attributes {
+    width: 60%;
+    background-color: white;
+    font-size: 14px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px 0 rgba(21,27,38,.15);
+    padding: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    display: block;
+}
+
+/* Mobile */
+@media only screen and (min-width: 480px) {
+    .item-attribute {
+        align-content: center;
+        align-items: center;
+        text-align: center;
+    }
+}

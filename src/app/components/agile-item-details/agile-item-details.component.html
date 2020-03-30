@@ -17,8 +17,19 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-3">
-        
+      <div class="item-attributes">
+        <div class="col-md-3">
+          <div class="item-attribute">
+            <label>Priority</label>
+            <div class="badge" [ngClass]="getPriorityClass(item.priority)">{{getPriorityTag(item.priority)}}</div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="item-attribute">
+            <label>Status</label>
+            <div class="badge" [ngClass]="getStatusClass(item.status)">{{getStatusText(item.status)}}</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

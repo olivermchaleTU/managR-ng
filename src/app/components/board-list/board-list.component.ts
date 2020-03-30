@@ -4,6 +4,7 @@ import { moveItemInArray, CdkDragDrop, transferArrayItem, CdkDragEnter, CdkDragE
 import { faEye, faEyeSlash, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { AgileItemsService } from 'src/app/services/agile-items/agile-items.service';
 import { Router } from '@angular/router';
+import { ItemUtilityService } from 'src/app/services/item-utility/item-utility.service';
 
 @Component({
   selector: 'app-board-list',
@@ -20,6 +21,7 @@ export class BoardListComponent implements OnInit {
 
   constructor(
     private agileItemsService: AgileItemsService,
+    private itemUtilityService: ItemUtilityService,
     private router: Router
   ) { }
 
@@ -68,53 +70,24 @@ export class BoardListComponent implements OnInit {
     });
   }
 
-  getStatusClass(item: BoardTask) {
-    switch (item.status) {
-      case 0:
-        return 'border-purple';
-      case 1:
-        return 'border-orange';
-      case 2:
-        return 'border-red';
-      case 3:
-        return 'border-green';
-      default:
-        return 'border-purple';
-    }
-  }
-
-  getPriorityTag(item: BoardTask) {
-    switch (item.priority) {
-      case 0:
-        return 'Low';
-      case 1:
-        return 'Medium';
-      case 2:
-        return 'High';
-      default:
-        return 'Unknown';
-    }
-  }
-
-  getPriorityClass(item: BoardTask) {
-    switch (item.priority) {
-      case 0:
-        return 'badge-green';
-      case 1:
-        return 'badge-orange';
-      case 2:
-        return 'badge-red';
-      default:
-        return 'badge-purple';
-    }
-  }
-
   toggleStoryVisiblity() {
     this.tasksVisible = !this.tasksVisible;
   }
 
   navigateToItem(item: BoardTask) {
     this.router.navigate(['/details', item.id]);
+  }
+
+  getStatusClass(status: number) {
+    return this.itemUtilityService.getStatusClass(status);
+  }
+
+  getPriorityClass(priority: number) {
+    return this.itemUtilityService.getPriorityClass(priority);
+  }
+
+  getPriorityTag(priority: number) {
+    return this.itemUtilityService.getPriorityTag(priority);
   }
 
 }

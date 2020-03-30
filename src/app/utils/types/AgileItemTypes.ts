@@ -35,6 +35,7 @@ export class AgileItem {
     dueBy: Date;
     priority: number;
     board: string;
+    status: number;
     assigneeId: string;
     createdBy: string;
     assigneeName: string;

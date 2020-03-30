@@ -27,6 +27,7 @@ import { ValidationService } from './services/validation/validation.service';
 import { UsersService } from './services/users/users.service';
 import { AgileItemsService } from './services/agile-items/agile-items.service';
 import { AgileItemDetailsComponent } from './components/agile-item-details/agile-item-details.component';
+import { ItemUtilityService } from './services/item-utility/item-utility.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,7 +59,8 @@ import { AgileItemDetailsComponent } from './components/agile-item-details/agile
     ModalService,
     ValidationService,
     UsersService,
-    AgileItemsService
+    AgileItemsService,
+    ItemUtilityService
   ],
   bootstrap: [AppComponent]
 })
