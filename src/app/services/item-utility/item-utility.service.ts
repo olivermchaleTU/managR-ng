@@ -64,4 +64,17 @@ export class ItemUtilityService {
         return 'badge-purple';
     }
   }
+
+  getTypeText(type: number) {
+    switch (type) {
+      case 0:
+        return 'Super Story';
+      case 1:
+        return 'Story';
+      case 2:
+        return 'Task';
+      default:
+        return 'Unknown';
+    }
+  }
 }

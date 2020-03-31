@@ -1,3 +1,5 @@
+import { NgbPaginationNumber } from '@ng-bootstrap/ng-bootstrap';
+
 export class ItemSearchQuery {
     itemType: number;
     searchQuery: string;
@@ -44,6 +46,20 @@ export class AgileItem {
     storyPoints?: number;
     story?: string;
     order?: number;
+    isActive: boolean;
+    isComplete: boolean;
     estimatedTime?: number;
     loggedTime?: number;
+}
+
+export class AgileItemOverview {
+    id: string;
+    assigneeId: string;
+    title: string;
+    description: string;
+    order?: number;
+    assigneeName: string;
+    priority: number;
+    status: NgbPaginationNumber;
+    isComplete: boolean
 }

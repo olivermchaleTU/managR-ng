@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { AgileItemShort, CreateAgileItem, AgileItem } from 'src/app/utils/types/AgileItemTypes';
+import { AgileItemShort, CreateAgileItem, AgileItem, AgileItemOverview } from 'src/app/utils/types/AgileItemTypes';
 import { map } from 'rxjs/operators';
 import { Subject, Observable } from 'rxjs';
 import { BoardTask } from 'src/app/utils/types/BoardTypes';
@@ -32,6 +32,10 @@ export class AgileItemsService {
     return this.http.post<BoardTask>(`${this.baseUrl}agileItems/updateAgileItem`, item);
   }
 
+  getRelatedItems(id: string): Observable<AgileItemOverview> {
+    return this.http.get<AgileItemOverview>(`${this.baseUrl}agileItems/getRelatedAgileItems?id=${id}`);
+  }
+
   getFullAgileItem(id: string) {
     return this.http.get<AgileItem>(`${this.baseUrl}agileItems/getFullAgileItem?id=${id}`);
   }
@@ -45,5 +49,7 @@ export class AgileItemsService {
   getCreatedStories(): Observable<any> {
     return this.storyCreated.asObservable();
   }
+
+
 
 }

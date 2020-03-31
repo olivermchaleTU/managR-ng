@@ -4,34 +4,140 @@
 <div *ngIf="!loading">
   <div class="container-fluid pt">
     <div class="row">
-      <div class="title-box">
-        <div *ngIf="item.agileItemType !== 0"  class="parent-title">
-          <a [routerLink]="['/details', item.parentId]">{{item.parentTitle}}</a>
-          <fa-icon [icon]="faChevronRight" class="fa-chevron"></fa-icon>
+      <div class="col-md-10 offset-md-1">
+        <div class="title-box">
+          <div *ngIf="item.agileItemType !== 0" class="parent-title">
+            <a [routerLink]="['/details', item.parentId]">{{item.parentTitle}}</a>
+            <fa-icon [icon]="faChevronRight" class="fa-chevron"></fa-icon>
+          </div>
+          <div class="title">
+            <p class="title-text">
+              {{item.title}}
+            </p>
+          </div>
         </div>
-        <div class="title">
+      </div>
+    </div>
+    <div class="row">
+      <div class="offset-md-1 col-md-7 col-xs-12">
+        <div class="managR-card">
+          <div class="row">
+            <div class="col-md-3 col-sm-12">
+              <div class="item-attribute">
+                <label>Priority</label>
+                <div class="badge" [ngClass]="getPriorityClass(item.priority)">{{getPriorityTag(item.priority)}}</div>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-12">
+              <div class="item-attribute">
+                <label>Status</label>
+                <div class="badge" [ngClass]="getStatusClass(item.status)">{{getStatusText(item.status)}}</div>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-12">
+              <div class="item-attribute mb5">
+                <label>Assigned To</label>
+                <a class="profile-link" [routerLink]="['/profile', item.assigneeId]">{{item.assigneeName}}</a>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-12">
+              <div class="item-attribute">
+                <label>Type</label>
+                <div class="date-time">{{getType(item.agileItemType)}}</div>
+              </div>
+            </div>
+          </div>
+          <hr class="hr-blue" />
+          <div class="row mt-15">
+            <div class="col-md-12 ml-10">
+              <label>Title</label>
+              <div>{{item.title}}</div>
+            </div>
+          </div>
+          <div class="row mt-15">
+            <div class="col-md-12 ml-10">
+              <label>Description</label>
+              <div class="description">{{item.description}}</div>
+            </div>
+          </div>
+          <hr class="hr-purple" />
+          <div class="row mt-15">
+            <div class="col-md-12 ml-10">
+              <label>Attachments</label>
+              <div>Some attachments here...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="item.agileItemType == 2" class="col-md-3 col-xs-12">
+        <div class="managR-card">
+          <label class="text-center">Task Management</label>
+          <div class="row">
+            <div class="col-md-12">
+              <label>Estimated Time</label>
+              {{item.estimatedTime}} Hours
+              <p>
+                <ngb-progressbar type="success" [value]="item.estimatedTime" [max]="item.estimatedTime">
+                </ngb-progressbar>
+              </p>
+              <label>Logged Time</label>
+              {{item.loggedTime}} Hours
+              <p>
+                <ngb-progressbar type="danger" [value]="item.loggedTime"
+                  [max]="item.estimatedTime > item.loggedTime ? item.estimatedTime : item.loggedTime">
+                </ngb-progressbar>
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <label>Created On</label>
+              <div class="date-time">{{getDateString(item.createdOn)}}</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <label>Due By</label>
+              <div class="date-time">{{getDateString(item.dueBy)}}</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <label>Active</label>
+              <div class="badge mb5" [class.badge-red]="!item.isActive" [class.badge-green]="item.isActive">
+                {{item.isActive ? 'Active' : 'Inactive'}}</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <label>Complete</label>
+              <div class="badge mb5" [class.badge-red]="!item.isComplete" [class.badge-green]="item.isComplete">
+                {{item.isComplete ? 'Complete' : 'Incomplete'}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-10 offset-md-1">
+        <div class="title-box" *ngIf="item.agileItemType === 2">
           <p class="title-text">
-            {{item.title}}
+            Related Tasks
           </p>
         </div>
       </div>
     </div>
     <div class="row">
-      <div class="item-attributes">
-        <div class="col-md-3">
-          <div class="item-attribute">
-            <label>Priority</label>
-            <div class="badge" [ngClass]="getPriorityClass(item.priority)">{{getPriorityTag(item.priority)}}</div>
+      <div class="col-md-10 offset-md-1">
+        <div class="managR-card">
+          <div class="center mt" *ngIf="!tasksLoaded">
+            <fa-icon [icon]="faSpinner" [spin]="true" size="lg"></fa-icon>&nbsp;Loading Related Tasks
           </div>
-        </div>
-        <div class="col-md-3">
-          <div class="item-attribute">
-            <label>Status</label>
-            <div class="badge" [ngClass]="getStatusClass(item.status)">{{getStatusText(item.status)}}</div>
+          <div *ngIf="tasksLoaded">
+            Related tasks...
           </div>
         </div>
       </div>
     </div>
   </div>
-
 </div>

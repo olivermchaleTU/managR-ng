@@ -16,8 +16,11 @@ export class AgileItemDetailsComponent implements OnInit, OnDestroy {
 
   id: string;
   loading = true;
+  tasksLoaded = false;
   item: AgileItem;
   $agileItemDetails: Subscription;
+  $relatedItems: Subscription;
+  relatedItemFailure = false;
   faSpinner: IconDefinition = faSpinner;
   faChevronRight: IconDefinition = faChevronRight;
 
@@ -32,6 +35,7 @@ export class AgileItemDetailsComponent implements OnInit, OnDestroy {
     this.activatedRoute.params.subscribe(params => {
       this.id = params.id;
       this.getAgileItemDetails();
+      this.getRelatedItems();
     });
   }
 
@@ -46,6 +50,22 @@ export class AgileItemDetailsComponent implements OnInit, OnDestroy {
     this.loading = false;
     this.item = resp;
     console.log(resp);
+  }
+
+  getRelatedItems() {
+    this.$relatedItems = this.agileItemsService.getRelatedItems(this.id).subscribe(
+      resp => this.handleRelatedItemResponse(resp),
+      err => this.handleRelatedItemFailure(err)
+    );
+  }
+
+  handleRelatedItemResponse(resp) {
+    console.log(resp);
+  }
+
+  handleRelatedItemFailure(err) {
+    this.relatedItemFailure = true;
+    console.error('error: ' + err);
   }
 
   handleItemFailure(err) {
@@ -81,6 +101,14 @@ export class AgileItemDetailsComponent implements OnInit, OnDestroy {
 
   getPriorityTag(priority: number) {
     return this.itemUtilityService.getPriorityTag(priority);
+  }
+
+  getType(itemType: number) {
+    return this.itemUtilityService.getTypeText(itemType);
+  }
+
+  getDateString(date: Date) {
+    return new Date(date).toDateString();
   }
 
 }
