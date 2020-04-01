@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { CreateComment, ItemComment } from 'src/app/utils/types/CommentTypes';
 
 @Injectable({
@@ -10,6 +10,7 @@ import { CreateComment, ItemComment } from 'src/app/utils/types/CommentTypes';
 export class CommentsService {
 
   private commentsBaseUrl = `${environment.commentsServiceBaseUrl}`;
+  private commentCreated = new Subject<any>();
   constructor(
     private http: HttpClient
   ) { }
@@ -21,4 +22,14 @@ export class CommentsService {
   getComments(id: string): Observable<any> {
     return this.http.get<ItemComment>(`${this.commentsBaseUrl}comments/getComments?id=${id}`);
   }
+
+    // Emits when a comment has been created
+    updateCommentCreated() {
+      this.commentCreated.next();
+    }
+
+    // Internal subscription to update current comment list whenever a new comment has been created
+    getCreatedComment(): Observable<any> {
+      return this.commentCreated.asObservable();
+    }
 }

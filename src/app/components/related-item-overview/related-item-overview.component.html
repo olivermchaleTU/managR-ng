@@ -1,36 +1,43 @@
 <div *ngIf="loaded">
-  <div class="row">
-    <div class="col-md-10 offset-md-1">
-      <div *ngFor="let item of items" class="col-lg-3 col-md-6 col-xs-12 managR-card" (click)="navigateToTask(item.id)">
-        <div class="col-md-10 offset-md-1">
-          <div class="title-text text-center">
-            {{item.title}}
-          </div>
-        </div>
-        <div class="col-md-10 offset-md-1 text-center">
-          <div class="description">{{item.description}}</div>
-        </div>
-        <div class="col-md-10 offset-md-1 text-center">
-          <a [routerLink]="['profile', item.assigneeId]">{{item.assigneeName}}</a>
-        </div>
+    <div class="row">
+      <div class="col-md-10 offset-md-1">
         <div class="row">
-          <div class="col-md-4">
-            <div class="center">
-              <div class="badge" [ngClass]="getPriorityClass(item.priority)">
-                {{getPriorityTag(item.priority)}}
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="center">
-              <div class="badge" [ngClass]="getStatusClass(item.status)">{{getStatusText(item.status)}}
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="center">
-              <div class="badge" [class.badge-red]="!item.isComplete" [class.badge-green]="item.isComplete">
-                {{item.isComplete ? 'Complete' : 'Incomplete'}}
+          <div class="col-md-12">
+            <div *ngFor="let item of items" class="col-lg-3 col-md-5 col-xs-12" (click)="navigateToTask(item.id)">
+              <div class="managR-card">
+                <div class="col-md-10 offset-md-1">
+                  <div title="{{item.title}}" class="title-text text-center">
+                    {{item.title}}
+                  </div>
+                </div>
+                <div class="col-md-10 offset-md-1 text-center">
+                  <div class="description" title="{{item.description}}">{{item.description}}</div>
+                </div>
+                <div class="col-md-10 offset-md-1 text-center">
+                  <a [routerLink]="['profile', item.assigneeId]">{{item.assigneeName}}</a>
+                </div>
+                <div class="row">
+                  <div class="col-md-4 col-xs-4">
+                    <div class="center">
+                      <div class="badge" [ngClass]="getPriorityClass(item.priority)">
+                        {{getPriorityTag(item.priority)}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4 col-xs-4">
+                    <div class="center">
+                      <div class="badge" [ngClass]="getStatusClass(item.status)">{{getStatusText(item.status)}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4 col-xs-4">
+                    <div class="center">
+                      <div class="badge" [class.badge-red]="!item.isComplete" [class.badge-green]="item.isComplete">
+                        {{item.isComplete ? 'Complete' : 'Incomplete'}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -38,4 +45,3 @@
       </div>
     </div>
   </div>
-</div>

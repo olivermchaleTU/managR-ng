@@ -77,4 +77,17 @@ export class ItemUtilityService {
         return 'Unknown';
     }
   }
+
+  getOverviewTitle(type: number) {
+    switch (type) {
+      case 0:
+        return 'Key stories';
+      case 1:
+        return 'Key tasks';
+      case 2:
+        return 'Related Tasks';
+      default:
+        return 'Error';
+    }
+  }
 }

@@ -85,6 +85,19 @@ export class AgileItemDetailsComponent implements OnInit, OnDestroy {
     return new Date(date).toDateString();
   }
 
+  getOverviewTitle(itemType: number) {
+    return this.itemUtilityService.getOverviewTitle(itemType);
+  }
+
+  getProgressText(itemType: number, complete = false): string {
+    let text = 'Total ';
+    if (complete) {
+      text = 'Complete ';
+    }
+    itemType === 1 ? text += 'Tasks' : text += 'Stories';
+    return text;
+  }
+
   ngOnDestroy(): void {
     if (this.$agileItemDetails) {
       this.$agileItemDetails.unsubscribe();

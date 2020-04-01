@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { CreateComment } from 'src/app/utils/types/CommentTypes';
 import { CommentsService } from 'src/app/services/comments/comments.service';
 import { ActivatedRoute } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-comment',
@@ -35,10 +36,21 @@ export class AddCommentComponent implements OnInit, OnDestroy {
     };
 
     this.commentsService.addComment(comment).subscribe(resp => {
-      console.log(resp);
+      this.commentsService.updateCommentCreated();
+      Swal.fire({
+        title: 'Success',
+        text: 'Successfully added comment',
+        icon: 'success',
+        confirmButtonText: 'Ok',
+      });
     },
     err => {
-      console.log(err);
+      Swal.fire({
+        title: 'Error',
+        text: 'Failed to add comment',
+        icon: 'error',
+        confirmButtonText: 'Ok',
+      });
     });
   }
 

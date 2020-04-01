@@ -50,6 +50,8 @@ export class AgileItem {
     isComplete: boolean;
     estimatedTime?: number;
     loggedTime?: number;
+    totalChildren?: number;
+    completeChildren?: number;
 }
 
 export class AgileItemOverview {

@@ -16,6 +16,7 @@ export class AgileItemCommentsComponent implements OnInit, OnDestroy {
   @Input() id: string;
   $routeParams: Subscription;
   $commentsSub: Subscription;
+  $commentCreatedSub: Subscription;
   noComments = false;
   commentsLoading = true;
   commentsErrored = false;
@@ -29,6 +30,13 @@ export class AgileItemCommentsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.$routeParams = this.activatedRoute.params.subscribe(params => {
       this.id = params.id;
+      this.getComments();
+    });
+    this.setSubscriptions();
+  }
+
+  setSubscriptions() {
+    this.$commentCreatedSub = this.commentsService.getCreatedComment().subscribe(created => {
       this.getComments();
     });
   }

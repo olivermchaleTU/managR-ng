@@ -8,8 +8,13 @@
     margin-right: 10px;
     display: inline-block;
     margin-bottom: 10px;
+    width: 100%;
 }
 
+.nm {
+    margin-left: 0px;
+    margin-right: 0px;
+}
 .managR-card:hover {
     cursor: pointer;
 }
@@ -17,8 +22,18 @@
 .title-text {
     font-size: large;
     font-weight: bold;
+    height: 30px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
+.col-lg-3 {
+    display: inline-block;
+}
+.h20 {
+    height: 20px;
+}
 .badge-green {
     background-color: #a4cf30;;
 }
@@ -28,7 +43,10 @@
 }
 
 .description {
-    min-height: 50px;
+    height: 30px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .badge-red {
@@ -37,6 +55,10 @@
 
 .badge-purple {
     background-color: #aa62e3;;
+}
+
+.badge {
+    color: white;
 }
 
 .center {

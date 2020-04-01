@@ -20,7 +20,7 @@
     </div>
     <div class="row">
       <div class="offset-md-1 col-md-7 col-xs-12">
-        <div class="managR-card">
+        <div class="managR-card pad">
           <div class="row">
             <div class="col-md-3 col-sm-12">
               <div class="item-attribute">
@@ -69,24 +69,40 @@
           </div>
         </div>
       </div>
-      <div *ngIf="item.agileItemType == 2" class="col-md-3 col-xs-12">
+      <div class="col-md-3 col-xs-12">
         <div class="managR-card">
-          <label class="text-center">Task Management</label>
+          <label class="text-center">{{getType(item.agileItemType)}} Management</label>
           <div class="row">
             <div class="col-md-12">
-              <label>Estimated Time</label>
-              {{item.estimatedTime}} Hours
-              <p>
-                <ngb-progressbar type="success" [value]="item.estimatedTime" [max]="item.estimatedTime">
-                </ngb-progressbar>
-              </p>
-              <label>Logged Time</label>
-              {{item.loggedTime}} Hours
-              <p>
-                <ngb-progressbar type="danger" [value]="item.loggedTime"
-                  [max]="item.estimatedTime > item.loggedTime ? item.estimatedTime : item.loggedTime">
-                </ngb-progressbar>
-              </p>
+              <div *ngIf="item.agileItemType === 2">
+                <label>Estimated Time</label>
+                {{item.estimatedTime}} Hours
+                <p>
+                  <ngb-progressbar type="success" [value]="item.estimatedTime" [max]="item.estimatedTime">
+                  </ngb-progressbar>
+                </p>
+                <label>Logged Time</label>
+                {{item.loggedTime}} Hours
+                <p>
+                  <ngb-progressbar type="danger" [value]="item.loggedTime"
+                    [max]="item.estimatedTime > item.loggedTime ? item.estimatedTime : item.loggedTime">
+                  </ngb-progressbar>
+                </p>
+              </div>
+              <div *ngIf="item.agileItemType !== 2">
+                <label>{{getProgressText(item.agileItemType)}}</label>
+                {{item.totalChildren}}
+                <p>
+                  <ngb-progressbar type="success" [value]="item.totalChildren" [max]="item.totalChildren">
+                  </ngb-progressbar>
+                </p>
+                <label>{{getProgressText(item.agileItemType, true)}}</label>
+                {{item.completeChildren}}
+                <p>
+                  <ngb-progressbar type="danger" [value]="item.completeChildren" [max]="item.completeChildren">
+                  </ngb-progressbar>
+                </p>
+              </div>
             </div>
           </div>
           <div class="row">
@@ -101,30 +117,14 @@
               <div class="date-time">{{getDateString(item.dueBy)}}</div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-md-12">
-              <label>Active</label>
-              <div class="badge mb5" [class.badge-red]="!item.isActive" [class.badge-green]="item.isActive">
-                {{item.isActive ? 'Active' : 'Inactive'}}
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <label>Complete</label>
-              <div class="badge mb5" [class.badge-red]="!item.isComplete" [class.badge-green]="item.isComplete">
-                {{item.isComplete ? 'Complete' : 'Incomplete'}}
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-md-10 offset-md-1">
-        <div class="title-box" *ngIf="item.agileItemType === 2">
+        <div class="title-box">
           <p class="title-text">
-            Related Tasks
+            {{getOverviewTitle(item.status)}}
           </p>
         </div>
       </div>
