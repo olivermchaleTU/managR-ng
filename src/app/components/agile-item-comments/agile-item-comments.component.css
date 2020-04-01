@@ -1,0 +1,24 @@
+.title-text {
+    font-size: large;
+    font-weight: bold;
+}
+
+.managR-card {
+    background-color: white;
+    font-size: 14px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px 0 rgba(21,27,38,.15);
+    padding: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    display: block;
+    margin-top: 20px;
+}
+
+.ml-15 {
+    margin-left: 15px;
+}
+
+.hr-purple {
+    border: 2px solid #aa62e3;
+} 

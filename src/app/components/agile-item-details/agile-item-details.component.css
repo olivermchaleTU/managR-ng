@@ -13,8 +13,6 @@
 }
 
 .container-fluid {
-    margin-right: 5px;
-    margin-left: 5px;
     background-color: #f6f8f9;
     height: 100%;
 }
@@ -58,6 +56,7 @@ label {
 }
 
 .title-box {
+    margin-top: 5px;
     margin-left: 10px;
 }
 

@@ -105,14 +105,16 @@
             <div class="col-md-12">
               <label>Active</label>
               <div class="badge mb5" [class.badge-red]="!item.isActive" [class.badge-green]="item.isActive">
-                {{item.isActive ? 'Active' : 'Inactive'}}</div>
+                {{item.isActive ? 'Active' : 'Inactive'}}
+              </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12">
               <label>Complete</label>
               <div class="badge mb5" [class.badge-red]="!item.isComplete" [class.badge-green]="item.isComplete">
-                {{item.isComplete ? 'Complete' : 'Incomplete'}}</div>
+                {{item.isComplete ? 'Complete' : 'Incomplete'}}
+              </div>
             </div>
           </div>
         </div>
@@ -127,17 +129,20 @@
         </div>
       </div>
     </div>
+    <div *ngIf="id != null && id != undefined">
+      <app-related-item-overview [id]="id"></app-related-item-overview>
+    </div>
     <div class="row">
       <div class="col-md-10 offset-md-1">
-        <div class="managR-card">
-          <div class="center mt" *ngIf="!tasksLoaded">
-            <fa-icon [icon]="faSpinner" [spin]="true" size="lg"></fa-icon>&nbsp;Loading Related Tasks
-          </div>
-          <div *ngIf="tasksLoaded">
-            Related tasks...
+        <div class="title-box">
+          <div class="title-text">
+            Comments
           </div>
         </div>
       </div>
+    </div>
+    <div *ngIf="id != null && id != undefined">
+      <app-agile-item-comments></app-agile-item-comments>
     </div>
   </div>
 </div>

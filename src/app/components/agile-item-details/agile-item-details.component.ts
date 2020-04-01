@@ -14,13 +14,11 @@ import { ItemUtilityService } from 'src/app/services/item-utility/item-utility.s
 })
 export class AgileItemDetailsComponent implements OnInit, OnDestroy {
 
-  id: string;
+  id: string = null;
   loading = true;
-  tasksLoaded = false;
   item: AgileItem;
   $agileItemDetails: Subscription;
-  $relatedItems: Subscription;
-  relatedItemFailure = false;
+  $routeParams: Subscription;
   faSpinner: IconDefinition = faSpinner;
   faChevronRight: IconDefinition = faChevronRight;
 
@@ -32,10 +30,9 @@ export class AgileItemDetailsComponent implements OnInit, OnDestroy {
     ) { }
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe(params => {
+    this.$routeParams = this.activatedRoute.params.subscribe(params => {
       this.id = params.id;
       this.getAgileItemDetails();
-      this.getRelatedItems();
     });
   }
 
@@ -52,22 +49,6 @@ export class AgileItemDetailsComponent implements OnInit, OnDestroy {
     console.log(resp);
   }
 
-  getRelatedItems() {
-    this.$relatedItems = this.agileItemsService.getRelatedItems(this.id).subscribe(
-      resp => this.handleRelatedItemResponse(resp),
-      err => this.handleRelatedItemFailure(err)
-    );
-  }
-
-  handleRelatedItemResponse(resp) {
-    console.log(resp);
-  }
-
-  handleRelatedItemFailure(err) {
-    this.relatedItemFailure = true;
-    console.error('error: ' + err);
-  }
-
   handleItemFailure(err) {
     this.loading = false;
     Swal.fire({
@@ -78,13 +59,6 @@ export class AgileItemDetailsComponent implements OnInit, OnDestroy {
     }).then((clicked) => {
       this.router.navigate(['/board']);
     });
-  }
-
-
-  ngOnDestroy(): void {
-    if (this.$agileItemDetails) {
-      this.$agileItemDetails.unsubscribe();
-    }
   }
 
   getStatusClass(status: number, isBadge = true) {
@@ -109,6 +83,15 @@ export class AgileItemDetailsComponent implements OnInit, OnDestroy {
 
   getDateString(date: Date) {
     return new Date(date).toDateString();
+  }
+
+  ngOnDestroy(): void {
+    if (this.$agileItemDetails) {
+      this.$agileItemDetails.unsubscribe();
+    }
+    if (this.$routeParams) {
+      this.$routeParams.unsubscribe();
+    }
   }
 
 }

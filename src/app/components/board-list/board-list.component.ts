@@ -75,6 +75,7 @@ export class BoardListComponent implements OnInit {
   }
 
   navigateToItem(item: BoardTask) {
+    this.router.onSameUrlNavigation = 'reload';
     this.router.navigate(['/details', item.id]);
   }
 

@@ -28,6 +28,8 @@ import { UsersService } from './services/users/users.service';
 import { AgileItemsService } from './services/agile-items/agile-items.service';
 import { AgileItemDetailsComponent } from './components/agile-item-details/agile-item-details.component';
 import { ItemUtilityService } from './services/item-utility/item-utility.service';
+import { RelatedItemOverviewComponent } from './components/related-item-overview/related-item-overview.component';
+import { AgileItemCommentsComponent } from './components/agile-item-comments/agile-item-comments.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +42,9 @@ import { ItemUtilityService } from './services/item-utility/item-utility.service
     ModalComponent,
     BoardToolbarComponent,
     CreateAgileItemComponent,
-    AgileItemDetailsComponent
+    AgileItemDetailsComponent,
+    RelatedItemOverviewComponent,
+    AgileItemCommentsComponent
   ],
   imports: [
     BrowserModule,
