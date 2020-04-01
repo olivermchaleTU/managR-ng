@@ -1,15 +1,36 @@
 <div class="row">
   <div class="col-md-10 offset-md-1">
-    <div class="managR-card">
+    <div class="managR-card mb-50">
       <div class="row">
         <div class="col-md-11 offset-md-1 ml-15">
-          <div class="commenter-name">
-            <a [routerLink]="['/profile', 123]">Oliver</a>
+          <div class="center mt" *ngIf="commentsLoading">
+            <fa-icon [icon]="faSpinner" [spin]="true" size="lg"></fa-icon>
           </div>
-          <div class="comment">
-            This is a great story!
+          <div class="center mt" *ngIf="commentsErrored">
+            Error getting comments
           </div>
-          <hr class="hr-purple"/>
+          <div class="center mt" *ngIf="noComments">
+            No comments available
+          </div>
+          <div *ngIf="!commentsLoading && !commentsErrored && !noComments">
+            <div *ngFor="let comment of comments">
+              <div class="commenter-name">
+                <a [routerLink]="['/profile', comment.commenterId]">{{comment.commenterName}}</a>
+              </div>
+              <div class="comment-date">
+                &nbsp;&nbsp;{{getDateString(comment.createdAt)}}
+              </div>
+              <div class="comment">
+                {{comment.comment}}
+              </div>
+              <hr/>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mb-30">
+        <div class="col-md-11 ml-15">
+            <app-add-comment [id]="id"></app-add-comment>
         </div>
       </div>
     </div>
