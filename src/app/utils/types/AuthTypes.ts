@@ -23,3 +23,10 @@ export class UserShort {
     id: string;
     name: string;
 }
+
+export class UserDetailVm {
+    email: string;
+    firstName: string;
+    lastName: string;
+    role: number;
+}

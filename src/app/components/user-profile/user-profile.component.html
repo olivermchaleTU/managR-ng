@@ -1,3 +1,31 @@
-<p>
-  user-profile works!
-</p>
+<div class="container-fluid pt fill-height">
+  <div class="managR-card">
+    <div *ngIf="loading">
+      <div class="center">
+        <fa-icon [icon]="faSpinner" [spin]="true">Loading...</fa-icon>
+      </div>
+    </div>
+    <div *ngIf="!loading">
+      <div class="row">
+        <div class="col-md-4 offset-md-4 text-center">
+          <h2 class="pt">{{user.firstName + ' ' + user.lastName}}</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4 offset-md-4 center">
+          <fa-icon [icon]="faUser" size="6x"></fa-icon>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4 offset-md-4 center">
+          <h4>{{user.email}}</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4 offset-md-4 center">
+          <h4>{{getRoleText(user.role)}}</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
