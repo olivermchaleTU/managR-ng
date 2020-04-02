@@ -31,6 +31,7 @@ import { RelatedItemOverviewComponent } from './components/related-item-overview
 import { AgileItemCommentsComponent } from './components/agile-item-comments/agile-item-comments.component';
 import { CommentsService } from './services/comments/comments.service';
 import { AddCommentComponent } from './components/add-comment/add-comment.component';
+import { ThemeService } from './services/theme/theme.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,7 +68,8 @@ import { AddCommentComponent } from './components/add-comment/add-comment.compon
     UsersService,
     AgileItemsService,
     ItemUtilityService,
-    CommentsService
+    CommentsService,
+    ThemeService
   ],
   bootstrap: [AppComponent]
 })

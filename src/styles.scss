@@ -10,6 +10,11 @@
     --managR-green: #a4cf30;
     --managR-blue: #b2fefa;
     --managR-lightext: rgb(224, 224, 224);
+
+    --theme-main: white;
+    --background-default: #f6f8f9;
+    --card-default: white;
+    --text-main: black;
 }
 
 .cdkDrag {
@@ -23,4 +28,18 @@
 .error-text {
     padding-top: 2px;
     color: red;
+}
+
+body {
+    color: var(--text-main) !important;
+}
+
+.dropdown-menu.show {
+    background: var(--background-default);
+    color: var(--text-main);
+}
+
+.form-control {
+    background-color: var(--background-default) !important;
+    color: var(--text-main) !important;
 }

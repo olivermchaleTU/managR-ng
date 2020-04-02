@@ -13,7 +13,7 @@
 }
 
 .container-fluid {
-    background-color: #f6f8f9;
+    background-color: var(--background-default);;
     height: 100%;
 }
 
@@ -62,7 +62,7 @@ label {
 
 
 .managR-card {
-    background-color: white;
+    background-color: var(--theme-main);;
     font-size: 14px;
     border-radius: 4px;
     box-shadow: 0 1px 3px 0 rgba(21,27,38,.15);
@@ -116,12 +116,16 @@ label {
 
 .editable-dropdown {
     cursor: pointer;
-    color: #222222
+    color: var(--text-main);
 }
 
 .clickable:hover {
     cursor: pointer;
     opacity: 0.8;
+}
+
+.dropdown-menu.show {
+    background: var(--background-default);
 }
 
 .button-group {
