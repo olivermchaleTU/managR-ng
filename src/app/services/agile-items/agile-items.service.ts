@@ -32,6 +32,10 @@ export class AgileItemsService {
     return this.http.post<BoardTask>(`${this.baseUrl}agileItems/updateAgileItem`, item);
   }
 
+  updateFullAgileItem(item: AgileItem) {
+    return this.http.post<AgileItem>(`${this.baseUrl}agileItems/updateFullAgileItem`, item);
+  }
+
   getRelatedItems(id: string): Observable<AgileItemOverview> {
     return this.http.get<AgileItemOverview>(`${this.baseUrl}agileItems/getRelatedAgileItems?id=${id}`);
   }

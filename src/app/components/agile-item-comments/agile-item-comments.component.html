@@ -6,11 +6,11 @@
           <div class="center mt" *ngIf="commentsLoading">
             <fa-icon [icon]="faSpinner" [spin]="true" size="lg"></fa-icon>
           </div>
-          <div class="center mt" *ngIf="commentsErrored">
+          <div class="center mt err-txt" *ngIf="commentsErrored">
             Error getting comments
           </div>
-          <div class="center mt" *ngIf="noComments">
-            No comments available
+          <div class="center mt err-txt" *ngIf="noComments">
+            No comments yet
           </div>
           <div *ngIf="!commentsLoading && !commentsErrored && !noComments">
             <div *ngFor="let comment of comments">

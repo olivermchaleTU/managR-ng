@@ -35,6 +35,8 @@ export class AddCommentComponent implements OnInit, OnDestroy {
       commenterId: localStorage.getItem('currentUserId'),
     };
 
+    this.commentModel = '';
+
     this.commentsService.addComment(comment).subscribe(resp => {
       this.commentsService.updateCommentCreated();
       Swal.fire({

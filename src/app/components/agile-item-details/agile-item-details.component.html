@@ -24,47 +24,110 @@
           <div class="row">
             <div class="col-md-3 col-sm-12">
               <div class="item-attribute">
-                <label>Priority</label>
+                <span>
+                  <div ngbDropdown>
+                    <label class="editable-dropdown" id="priority" ngbDropdownToggle>Priority</label>
+                    <div ngbDropdownMenu class="center" aria-labelledby="priority">
+                      <div ngbDropdownItem class="badge badge-red clickable" (click)="updatePriority(2)">High</div><br />
+                      <div ngbDropdownItem class="badge badge-orange clickable" (click)="updatePriority(1)">Medium</div><br />
+                      <div ngbDropdownItem class="badge badge-green clickable" (click)="updatePriority(0)">Low</div><br />
+                    </div>
+                  </div>
+                </span>
                 <div class="badge" [ngClass]="getPriorityClass(item.priority)">{{getPriorityTag(item.priority)}}</div>
               </div>
             </div>
             <div class="col-md-3 col-sm-12">
               <div class="item-attribute">
-                <label>Status</label>
+                <span>
+                  <div ngbDropdown>
+                    <label class="editable-dropdown" id="status" ngbDropdownToggle>Status</label>
+                    <div ngbDropdownMenu class="center" aria-labelledby="status">
+                      <div ngbDropdownItem class="badge badge-purple clickable" (click)="updateStatus(0)">Pending</div><br />
+                      <div ngbDropdownItem class="badge badge-orange clickable" (click)="updateStatus(1)">In Progress</div><br />
+                      <div ngbDropdownItem class="badge badge-green clickable" (click)="updateStatus(3)">Done</div><br />
+                      <div ngbDropdownItem class="badge badge-red clickable" (click)="updateStatus(2)">Blocked</div><br />
+                    </div>
+                  </div>
+                </span>
                 <div class="badge" [ngClass]="getStatusClass(item.status)">{{getStatusText(item.status)}}</div>
               </div>
             </div>
             <div class="col-md-3 col-sm-12">
               <div class="item-attribute mb5">
-                <label>Assigned To</label>
-                <a class="profile-link" [routerLink]="['/profile', item.assigneeId]">{{item.assigneeName}}</a>
+                <label>Assigned To <fa-icon class="clickable" (click)="editAssignee = !editAssignee" [icon]="faPencil">
+                  </fa-icon>
+                </label>
+                <a *ngIf="!editAssignee" class="profile-link"
+                  [routerLink]="['/profile', item.assigneeId]">{{item.assigneeName}}</a>
+                <div *ngIf="editAssignee">
+                  <input id="assignee" type="text" class="form-control" [resultTemplate]="assigneeSelect"
+                    [inputFormatter]="userResultFormatter" [editable]='false' [(ngModel)]="userModel"
+                    [ngbTypeahead]="searchForUser" placeholder="Search...">
+                  <ng-template let-r="result" let-t="term" #assigneeSelect>
+                    <ngb-highlight [result]="r.name" [term]="t" (click)="assigneeSelected(r); editAssignee = false"></ngb-highlight>
+                  </ng-template>
+                </div>
               </div>
             </div>
             <div class="col-md-3 col-sm-12">
-              <div class="item-attribute">
+              <div *ngIf="item.agileItemType !== 1" class="item-attribute">
                 <label>Type</label>
                 <div class="date-time">{{getType(item.agileItemType)}}</div>
+              </div>
+              <div *ngIf="item.agileItemType === 1" class="item-attribute">
+                <label>Story Points</label>
+                <div class="date-time">
+                  {{item.storyPoints}}
+                </div>
               </div>
             </div>
           </div>
           <hr class="hr-blue" />
           <div class="row mt-15">
             <div class="col-md-12 ml-10">
-              <label>Title</label>
-              <div>{{item.title}}</div>
+              <label>
+                Title
+                <fa-icon class="clickable" (click)="editTitle = !editTitle" [icon]="faPencil"></fa-icon>
+              </label>
+              <div *ngIf=!editTitle>{{item.title}}</div>
+              <div *ngIf="editTitle">
+                <div class="col-md-10 col-xs-10">
+                  <input id="title" type="text" class="form-control" [(ngModel)]="item.title" placeholder="Title">
+                  <div class="button-group">
+                    <button class="btn btn-primary" (click)="saveGenericChange(); editTitle = false;">Save Changes</button>&nbsp;
+                    <button class="btn btn-secondary float-right"
+                      (click)="editTitle = false; item.title = initialItem.title">Cancel</button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div class="row mt-15">
             <div class="col-md-12 ml-10">
-              <label>Description</label>
-              <div class="description">{{item.description}}</div>
+              <label>
+                Description
+                <fa-icon class="clickable" (click)="editDescription = !editDescription" [icon]="faPencil"></fa-icon>
+              </label>
+              <div *ngIf=!editDescription>{{item.description}}</div>
+              <div *ngIf="editDescription">
+                <div class="col-md-10 col-xs-10">
+                  <textarea id="description" type="text" class="form-control" [(ngModel)]="item.description"
+                    placeholder="Enter a description"></textarea>
+                  <div class="button-group">
+                    <button class="btn btn-primary" (click)="saveGenericChange(); editDescription = false">Save Changes</button>&nbsp;
+                    <button class="btn btn-secondary float-right"
+                      (click)="editDescription = false; item.description = initialItem.description">Cancel</button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <hr class="hr-purple" />
           <div class="row mt-15">
             <div class="col-md-12 ml-10">
               <label>Attachments</label>
-              <div>Some attachments here...</div>
+              <div class="mb-11">Some attachments here...</div>
             </div>
           </div>
         </div>
@@ -81,13 +144,24 @@
                   <ngb-progressbar type="success" [value]="item.estimatedTime" [max]="item.estimatedTime">
                   </ngb-progressbar>
                 </p>
-                <label>Logged Time</label>
-                {{item.loggedTime}} Hours
-                <p>
-                  <ngb-progressbar type="danger" [value]="item.loggedTime"
-                    [max]="item.estimatedTime > item.loggedTime ? item.estimatedTime : item.loggedTime">
-                  </ngb-progressbar>
-                </p>
+                <label>Logged Time <fa-icon [icon]="faPlus" (click)="loggingTime = !loggingTime" class="clickable">
+                  </fa-icon></label>
+                <div *ngIf="!loggingTime">
+                  {{item.loggedTime}} Hours
+                  <p>
+                    <ngb-progressbar type="danger" [value]="item.loggedTime"
+                      [max]="item.estimatedTime > item.loggedTime ? item.estimatedTime : item.loggedTime">
+                    </ngb-progressbar>
+                  </p>
+                </div>
+                <div *ngIf="loggingTime">
+                  <input type="number" id="timeLogged" class="form-control" (change)="timeToAdd = $event.target.value">
+                  <div class="button-group">
+                    <button class="btn btn-primary" (click)="addTime(); loggingTime = false">Save</button>&nbsp;
+                    <button class="btn btn-secondary float-right"
+                      (click)="loggingTime = false; item.loggedTime = initialItem.loggedTime">Cancel</button>
+                  </div>
+                </div>
               </div>
               <div *ngIf="item.agileItemType !== 2">
                 <label>{{getProgressText(item.agileItemType)}}</label>
@@ -113,7 +187,12 @@
           </div>
           <div class="row">
             <div class="col-md-12">
-              <label>Due By</label>
+              <label>
+                Due By
+                <fa-icon (click)=" editDueBy = !editDueBy; d.toggle()" class="fa-icon" [icon]="faCalendar"></fa-icon>
+              </label>
+              <input class="hide" readonly (dateSelect)="dateChanged($event)" type="text"
+                placeholder="YYYY-MM-DD" [(ngModel)]="dateModel" ngbDatepicker #d="ngbDatepicker" />
               <div class="date-time">{{getDateString(item.dueBy)}}</div>
             </div>
           </div>
@@ -124,7 +203,7 @@
       <div class="col-md-10 offset-md-1">
         <div class="title-box">
           <p class="title-text">
-            {{getOverviewTitle(item.status)}}
+            {{getOverviewTitle(item.agileItemType)}}
           </p>
         </div>
       </div>

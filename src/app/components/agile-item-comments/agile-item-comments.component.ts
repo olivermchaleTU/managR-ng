@@ -45,7 +45,7 @@ export class AgileItemCommentsComponent implements OnInit, OnDestroy {
     this.$commentsSub = this.commentsService.getComments(this.id).subscribe(
       resp => {
         this.commentsLoading = false;
-        if (resp === []) {
+        if (!resp.length) {
           this.noComments = true;
         } else {
           this.comments = resp;

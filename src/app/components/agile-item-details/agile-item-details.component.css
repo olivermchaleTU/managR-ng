@@ -114,7 +114,24 @@ label {
     margin-bottom: 5px;
 }
 
-.pad {
-    padding-bottom: 15px;
+.editable-dropdown {
+    cursor: pointer;
+    color: #222222
 }
 
+.clickable:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.button-group {
+    margin-top: 10px;
+}
+
+.hide {
+    display: none;
+}
+
+.mb-11 {
+    margin-bottom: 11px;
+}
