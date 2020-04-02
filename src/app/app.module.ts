@@ -54,7 +54,6 @@ import { AddCommentComponent } from './components/add-comment/add-comment.compon
     AppRoutingModule,
     HttpClientModule,
     DragDropModule,
-    NgPersonModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     FontAwesomeModule,
     ReactiveFormsModule,

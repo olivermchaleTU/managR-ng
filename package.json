@@ -31,7 +31,6 @@
     "bootstrap": "^4.4.1",
     "jquery": "^3.4.1",
     "jwt-decode": "^2.2.0",
-    "ng-person": "^1.0.4",
     "rxjs": "~6.5.4",
     "sweetalert2": "^9.10.0",
     "tslib": "^1.10.0",
