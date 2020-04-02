@@ -13,7 +13,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { NgPersonModule } from 'ng-person';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthService } from './services/auth/auth.service';
