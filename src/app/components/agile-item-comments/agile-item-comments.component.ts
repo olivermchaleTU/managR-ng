@@ -53,6 +53,7 @@ export class AgileItemCommentsComponent implements OnInit, OnDestroy {
         console.log(resp);
       },
       err => {
+        this.commentsLoading = false;
         this.commentsErrored = true;
         console.log(err);
       });

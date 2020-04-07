@@ -1,0 +1,136 @@
+<div class="center mt" *ngIf="progressLoading || burndownLoading || analyticsLoading">
+  <fa-icon [icon]="faSpinner" [spin]="true" size="lg"></fa-icon>
+</div>
+<div *ngIf="!progressLoading && !burndownLoading && !analyticsLoading">
+  <div class="container-fluid pt">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="text-center">
+          <div class="board-name">{{analytics.boardTitle}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-10 offset-md-1">
+        <div class="row">
+          <div class="col-md-6 col-lg-3">
+            <div class="managR-card analytics-item">
+              <div class="row">
+                <div class="col-md-6 col-sm-6">
+                  <circle-progress [percent]="storyPercent" [radius]="50" [backgroundColor]="getBackgroundColor()"
+                    [titleColor]="getTextColor()" [unitsColor]="getTextColor()" [showSubtitle]="false"
+                    [outerStrokeWidth]="10" [innerStrokeWidth]="0" [outerStrokeColor]="'#b2fefa'"
+                    [innerStrokeColor]="'#C7E596'" [animation]="true" [animationDuration]="300"></circle-progress>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                  <div class="text-center">
+                    <h1>{{analytics.completeStories}} / {{analytics.totalStories}}</h1>
+                    <br />
+                    <h5>Stories Complete</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="managR-card analytics-item">
+              <div class="row">
+                <div class="col-md-6 col-sm-6">
+                  <circle-progress [percent]="taskPercent" [radius]="50" [backgroundColor]="getBackgroundColor()"
+                    [titleColor]="getTextColor()" [unitsColor]="getTextColor()" [showSubtitle]="false"
+                    [outerStrokeWidth]="10" [innerStrokeWidth]="0" [outerStrokeColor]="'#aa62e3'"
+                    [innerStrokeColor]="'#aa62e3'" [animation]="true" [animationDuration]="300"></circle-progress>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                  <div class="text-center">
+                    <h1>{{analytics.completeTasks}} / {{analytics.totalTasks}}</h1>
+                    <br />
+                    <h5>Tasks Complete</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="managR-card analytics-item">
+              <div class="row">
+                <div class="col-md-6 col-sm-6">
+                  <div class="number-title managR-blue">
+                    {{analytics.estimatedHours}}
+                  </div>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                  <h5 class="number-description">Hours Estimated</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="managR-card analytics-item">
+              <div class="row">
+                <div class="col-md-6 col-sm-6">
+                  <div class="number-title managR-purple">
+                    {{analytics.loggedHours}}
+                  </div>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                  <h5 class="number-description">Hours Logged</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row pt">
+      <div class="col-md-10 offset-md-1">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="managR-card">
+              <app-comparison-chart [data]="burndownChartResponse"></app-comparison-chart>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="managR-card">
+              <app-comparison-chart [data]="progressChartResponse"></app-comparison-chart>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row pt pb">
+      <div class="col-md-10 offset-md-1">
+        <div class="row">
+          <div class="col-md-3 offset-md-2">
+            <div class="managR-card">
+              <div class="row">
+                <div class="col-md-6 col-sm-6">
+                  <div class="date-title managR-purple">
+                      {{getDateString(analytics.startDate)}}
+                  </div>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                  <h5 class="number-description">Board Start Date</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 offset-md-2">
+            <div class="managR-card">
+              <div class="row">
+                <div class="col-md-6 col-sm-6">
+                  <div class="date-title managR-blue">
+                      {{getDateString(analytics.endDate)}}
+                  </div>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                  <h5 class="number-description">Board End Date</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

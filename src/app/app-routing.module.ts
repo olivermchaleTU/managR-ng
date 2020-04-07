@@ -6,6 +6,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AgileItemDetailsComponent } from './components/agile-item-details/agile-item-details.component';
+import { AnalyticsComponent } from './components/analytics/analytics.component';
 
 
 const routes: Routes = [
@@ -40,6 +41,12 @@ const routes: Routes = [
     path: 'details/:id',
     pathMatch: 'full',
     component: AgileItemDetailsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'analytics/:id',
+    pathMatch: 'full',
+    component: AnalyticsComponent,
     canActivate: [AuthGuard]
   }
 ];

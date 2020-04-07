@@ -1,0 +1,76 @@
+.managR-card {
+    background-color: var(--theme-main);;
+    font-size: 14px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px 0 rgba(21,27,38,.15);
+    padding: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    display: block;
+    margin-top: 20px;
+}
+
+.analytics-item {
+    min-height: 130px;
+}
+
+.container-fluid {
+    background-color: var(--background-default);;
+    height: 100%;
+}
+
+.pt {
+    padding-top: 20px;
+}
+
+.number-title {
+    font-size: 5.46rem;
+}
+
+.managR-blue {
+    color: #b2fefa
+}
+
+.managR-purple {
+    color: #aa62e3
+}
+
+.number-description {
+    padding-top: 15px;
+}
+
+.center {
+    align-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.board-name {
+    font-size: 2rem;
+    font-weight: bold;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.pb {
+    padding-bottom: 110px;
+}
+
+.date-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+/* Mobile */
+@media only screen and (max-width: 480px) {
+    .managR-card {
+        align-content: center;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+@media only screen and (min-width: 480px) {
+    .number-description {
+        padding-top: 55px;
+    }
+}

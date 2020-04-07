@@ -32,6 +32,13 @@ import { AgileItemCommentsComponent } from './components/agile-item-comments/agi
 import { CommentsService } from './services/comments/comments.service';
 import { AddCommentComponent } from './components/add-comment/add-comment.component';
 import { ThemeService } from './services/theme/theme.service';
+import { ComparisonChartComponent } from './components/comparison-chart/comparison-chart.component';
+import { ChartsModule } from 'ng2-charts';
+import { AnalyticsComponent } from './components/analytics/analytics.component';
+import { ChartService } from './services/chart/chart.service';
+import { NgCircleProgressModule } from 'ng-circle-progress';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +54,9 @@ import { ThemeService } from './services/theme/theme.service';
     AgileItemDetailsComponent,
     RelatedItemOverviewComponent,
     AgileItemCommentsComponent,
-    AddCommentComponent
+    AddCommentComponent,
+    ComparisonChartComponent,
+    AnalyticsComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +67,9 @@ import { ThemeService } from './services/theme/theme.service';
     FontAwesomeModule,
     ReactiveFormsModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    ChartsModule,
+    NgCircleProgressModule.forRoot({})
   ],
   providers: [
     BoardService,
@@ -69,7 +80,8 @@ import { ThemeService } from './services/theme/theme.service';
     AgileItemsService,
     ItemUtilityService,
     CommentsService,
-    ThemeService
+    ThemeService,
+    ChartService
   ],
   bootstrap: [AppComponent]
 })
