@@ -37,7 +37,9 @@ import { ChartsModule } from 'ng2-charts';
 import { AnalyticsComponent } from './components/analytics/analytics.component';
 import { ChartService } from './services/chart/chart.service';
 import { NgCircleProgressModule } from 'ng-circle-progress';
-
+import { AddAttachmentComponent } from './components/add-attachment/add-attachment.component';
+import { AttachmentsService } from './services/attachments/attachments.service';
+import { ViewAttachmentsComponent } from './components/view-attachments/view-attachments.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +58,9 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
     AgileItemCommentsComponent,
     AddCommentComponent,
     ComparisonChartComponent,
-    AnalyticsComponent
+    AnalyticsComponent,
+    AddAttachmentComponent,
+    ViewAttachmentsComponent
   ],
   imports: [
     BrowserModule,
@@ -81,7 +85,8 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
     ItemUtilityService,
     CommentsService,
     ThemeService,
-    ChartService
+    ChartService,
+    AttachmentsService,
   ],
   bootstrap: [AppComponent]
 })

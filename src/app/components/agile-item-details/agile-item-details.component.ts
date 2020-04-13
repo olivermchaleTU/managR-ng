@@ -10,6 +10,7 @@ import { ItemUtilityService } from 'src/app/services/item-utility/item-utility.s
 import { debounceTime, distinctUntilChanged, tap, switchMap, catchError } from 'rxjs/operators';
 import { UsersService } from 'src/app/services/users/users.service';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
+import { ModalService } from 'src/app/services/modal/modal.service';
 
 @Component({
   selector: 'app-agile-item-details',
@@ -36,6 +37,7 @@ export class AgileItemDetailsComponent implements OnInit, OnDestroy {
   searching = false;
   usersError = false;
   loggingTime = false;
+  attachmentsOpen = false;
   userModel: any;
   dateModel: any;
   initialItem: AgileItem;
@@ -46,7 +48,8 @@ export class AgileItemDetailsComponent implements OnInit, OnDestroy {
     private router: Router,
     private agileItemsService: AgileItemsService,
     private usersService: UsersService,
-    private itemUtilityService: ItemUtilityService
+    private itemUtilityService: ItemUtilityService,
+    private modalService: ModalService
     ) { }
 
   ngOnInit() {
@@ -61,6 +64,10 @@ export class AgileItemDetailsComponent implements OnInit, OnDestroy {
       resp => this.handleItemResponse(resp),
       err => this.handleItemFailure(err)
     );
+  }
+
+  setModalVisbility(visible: boolean) {
+    this.modalService.setVisibilityStatus(visible);
   }
 
   handleItemResponse(resp) {

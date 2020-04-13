@@ -1,0 +1,18 @@
+<app-modal #modal>
+  <div class="app-modal-header modal-heading">
+    Add attachment
+  </div>
+  <div class="app-modal-body" id="modal-body">
+    <input
+    style="display: none"
+    type="file"
+    #fileInput
+    multiple="multiple"
+    (change)="onSelected($event)"
+  />
+  <button (click)="showFileDialog()">Click here to Upload File</button>
+  </div>
+  <div class="app-modal-footer">
+    <button (click)="prepareFiles()">Upload</button>
+  </div>
+</app-modal>
