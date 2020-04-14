@@ -13,7 +13,7 @@ export class FileMetadata {
 
 export class PreparedAttachment {
     sasToken: string;
-    files: PreparedFileMetadata;
+    files: PreparedFileMetadata[];
 }
 
 export class PreparedFileMetadata {
@@ -21,6 +21,7 @@ export class PreparedFileMetadata {
     name: string;
     size: number;
     type: string;
+    complete = false;
 }
 
 export class Attachment {
@@ -30,4 +31,9 @@ export class Attachment {
     uploaderId: string;
     uploadedBy: string;
     uploadedOn: Date;
+}
+
+export class UpdateAttachment {
+    id: string;
+    status: number;
 }

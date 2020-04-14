@@ -23,6 +23,7 @@
               <th scope="col">Size</th>
               <th scope="col">Uploaded By</th>
               <th scope="col">Uploaded On</th>
+              <th scope="col">Status</th>
             </tr>
           </thead>
           <tbody>
@@ -38,6 +39,9 @@
               </td>
               <td>
                 {{getDateString(attachment.uploadedOn)}}
+              </td>
+              <td>
+                {{getStatusText(attachment.status)}}
               </td>
             </tr>
           </tbody>

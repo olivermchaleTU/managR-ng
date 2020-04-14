@@ -1,6 +1,6 @@
 <app-modal #modal>
   <div class="app-modal-header modal-heading">
-    Add attachment
+    Add attachments
   </div>
   <div class="app-modal-body" id="modal-body">
     <input
@@ -10,9 +10,37 @@
     multiple="multiple"
     (change)="onSelected($event)"
   />
-  <button (click)="showFileDialog()">Click here to Upload File</button>
+  <button class="btn btn-primary managr-btn" (click)="showFileDialog()">Select files</button>
+  <div *ngIf="filesSelected">
+    <div class="row">
+      <div class="col-md-11">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Size</th>
+              <th scope="col">Last Modified</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let file of currentFiles; let i = index">
+              <td>
+              {{file.name}}
+              </td>
+              <td>
+                {{file.size}}
+              </td>
+              <td>
+                {{getDateString(file.lastModifiedDate)}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
   </div>
   <div class="app-modal-footer">
-    <button (click)="prepareFiles()">Upload</button>
+    <button class="btn btn-secondary" [disabled]="!filesSelected" (click)="prepareFiles()">Upload</button>
   </div>
 </app-modal>

@@ -19,6 +19,7 @@ export class ViewAttachmentsComponent implements OnInit {
   faChevronUp: IconDefinition = faChevronUp;
   $routeParams: Subscription;
   $attachments: Subscription;
+  $attachmentsAdded: Subscription;
   id: string;
   loading = true;
   error = false;
@@ -43,6 +44,9 @@ export class ViewAttachmentsComponent implements OnInit {
       resp => this.handleAttachmentsResponse(resp),
       err => this.handleAttachmentsError(err)
     );
+    this.$attachmentsAdded = this.attachmentsService.getAddedAttachment().subscribe(
+      added => this.getData()
+    );
   }
 
   handleAttachmentsError(err: any): void {
@@ -63,6 +67,21 @@ export class ViewAttachmentsComponent implements OnInit {
     return new Date(date).toDateString();
   }
 
+  getStatusText(status: number) {
+    switch (status) {
+      case 0:
+        return 'Unknown';
+      case 1:
+        return 'Uploading';
+      case 2:
+        return 'Uploaded';
+      case 3:
+        return 'Failed';
+      default:
+        return 'Unknown';
+    }
+  }
+
   async downloadAttachment(i) {
     const metadata = this.attachments[i];
     const blobServiceClient = new BlobServiceClient('https://managrattachments.blob.core.windows.net');
@@ -77,7 +96,9 @@ export class ViewAttachmentsComponent implements OnInit {
     const fileReader = new FileReader();
     return new Promise<string>((resolve, reject) => {
       fileReader.onloadend = (ev: any) => {
-        resolve(ev.target!.result);
+        if (ev.target !== undefined) {
+          resolve(ev.target.result);
+        }
       };
       fileReader.onerror = reject;
       fileReader.readAsDataURL(blob);

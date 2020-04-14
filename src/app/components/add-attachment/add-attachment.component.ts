@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AttachmentsService } from 'src/app/services/attachments/attachments.service';
 import { Subscription } from 'rxjs';
-import { PrepareAttachment, FileMetadata, PreparedAttachment } from 'src/app/utils/types/AttachmentTypes';
+import { PrepareAttachment, FileMetadata, PreparedAttachment, UpdateAttachment } from 'src/app/utils/types/AttachmentTypes';
 import {
   AnonymousCredential,
   BaseRequestPolicy,
@@ -9,6 +9,8 @@ import {
   BlockBlobClient
 } from "@azure/storage-blob";
 import { ActivatedRoute } from '@angular/router';
+import Swal from 'sweetalert2';
+import { ModalService } from 'src/app/services/modal/modal.service';
 
 
 @Component({
@@ -22,10 +24,12 @@ export class AddAttachmentComponent implements OnInit {
   files: FileList;
   $routeParams: Subscription;
   id: string;
+  filesSelected = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private attachmentsService: AttachmentsService
+    private attachmentsService: AttachmentsService,
+    private modalService: ModalService
   ) { }
 
   ngOnInit() {
@@ -40,6 +44,21 @@ export class AddAttachmentComponent implements OnInit {
 
   onSelected($event): void {
     this.files = $event.target.files;
+    if (this.files != null && this.files !== undefined) {
+      this.filesSelected = true;
+    }
+  }
+
+  get currentFiles() {
+    const files: File[] = [];
+    for (let i = 0; i < this.files.length; i++) {
+      files.push(this.files.item(i));
+    }
+    return files;
+  }
+
+  getDateString(date: Date) {
+    return new Date(date).toDateString();
   }
 
   prepareFiles() {
@@ -67,37 +86,74 @@ export class AddAttachmentComponent implements OnInit {
     console.error(err);
   }
   handleFilePrepSuccess(resp: PreparedAttachment): void {
-    this.uploadFiles(resp);
+    const a = this.uploadFiles(resp).then(
+      success => {
+        this.attachmentsService.updateAttachmentAdded();
+        Swal.fire({
+          title: 'Success',
+          text: 'Successfully added attachments',
+          icon: 'success',
+          confirmButtonText: 'Ok',
+        }).then(clicked => {
+          this.resetModal();
+          this.setModalVisbility(false);
+        });
+      }
+    ).catch(err => {
+      Swal.fire({
+        title: 'Error',
+        text: 'Failed to add attachments',
+        icon: 'success',
+        confirmButtonText: 'Ok',
+      }).then(clicked => {
+        this.resetModal();
+        this.setModalVisbility(false);
+      });
+    });
+    console.log(a);
+  }
+
+  setModalVisbility(visible: boolean) {
+    this.modalService.setVisibilityStatus(visible);
   }
 
   async uploadFiles(files: PreparedAttachment) {
-    const file = files.files[0];
-    // https://managrattachments.blob.core.windows.net/managr
-    const pipeline = newPipeline(new AnonymousCredential());
-    const url = `https://managrattachments.blob.core.windows.net/managr/${file.id}`;
-    const blockBlobClient = new BlockBlobClient(
-      `${url}${files.sasToken}`, pipeline
-    );
+    for (let i = 0; i < files.files.length; i++) {
+      const currentMetadata = files.files[i];
+      const pipeline = newPipeline(new AnonymousCredential());
+      const url = `https://managrattachments.blob.core.windows.net/managr/${currentMetadata.id}`;
+      const blockBlobClient = new BlockBlobClient(
+        `${url}${files.sasToken}`, pipeline
+      );
 
-    const fileupload = this.files[0];
-    await blockBlobClient.uploadBrowserData(fileupload, {
-      maxSingleShotSize: 4 * 1024 * 1024
-    });
+      const currentFile = this.files[i];
+      await blockBlobClient.uploadBrowserData(currentFile, {
+        maxSingleShotSize: 4 * 1024 * 1024
+      }).then(
+        done => {
+          const updateAttachment: UpdateAttachment = {
+            id: currentMetadata.id,
+            status: 2
+          };
+          this.attachmentsService.updateAttachmentStatus(updateAttachment).subscribe(resp => {
+
+          });
+        }
+      ).catch(
+        err => {
+          const updateAttachment: UpdateAttachment = {
+            id: currentMetadata.id,
+            status: 3
+          };
+          this.attachmentsService.updateAttachmentStatus(updateAttachment).subscribe(resp => console.log('errored'));
+        }
+      );
+    }
   }
 
-    // async uploadFiles(files: PreparedAttachment) {
-  //   const file = files.files[0];
-  //   const sas = '?sv=2019-02-02&ss=b&srt=sco&sp=rwdlac&se=2020-04-13T21:12:21Z&st=2020-04-13T13:12:21Z&spr=https&sig=wQmGLlBtSyT%2Frv8F0%2FT1R93s3Z6bO%2Fa5ZNJObqdpaVk%3D';
-  //   // https://managrattachments.blob.core.windows.net/managr
-  //   const pipeline = newPipeline(new AnonymousCredential());
-  //   const url = `https://managrattachments.blob.core.windows.net/managr/${file.id}`;
-  //   const blockBlobClient = new BlockBlobClient(
-  //     `${url}${sas}`, pipeline
-  //   );
-
-  //   const fileupload = this.files[0];
-  //   await blockBlobClient.uploadBrowserData(fileupload, {
-  //     maxSingleShotSize: 4 * 1024 * 1024
-  //   });
-  // }
+  resetModal(): void {
+    this.fileInput.nativeElement.value = '';
+    this.files = undefined;
+    this.filesSelected = false;
+  }
 }
