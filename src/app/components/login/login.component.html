@@ -52,12 +52,20 @@
               </div>
             </div>
             <div class="form-group text-center">
-                <button [disabled]="!loginForm.valid" class="btn btn-light">
-                  Log In
-                  <fa-icon *ngIf="loading" [icon]="faSpinner" [spin]="true" size="sm"></fa-icon>
-                </button>
-              </div>
+              <button [disabled]="!loginForm.valid" class="btn btn-light">
+                Log In
+                <fa-icon *ngIf="loading" [icon]="faSpinner" [spin]="true" size="sm"></fa-icon>
+              </button>
+            </div>
           </form>
+          <div class="row">
+            <div class="register">
+              <div class="register-text">
+                Need an account?
+              </div>
+              <a class="link-text" [routerLink]="['/register']"> Register</a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
