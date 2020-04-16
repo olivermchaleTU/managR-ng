@@ -235,3 +235,18 @@
 .error-text {
     font-weight: bold;
 }
+
+.register {
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    width: 100%
+}
+
+.register-text {
+    color: white;
+}
+
+.link-text {
+    font-weight: bold;
+}
