@@ -29,7 +29,9 @@
           <tbody>
             <tr *ngFor="let attachment of attachments; let i = index">
               <td>
-                <span (click)="downloadAttachment(i)">{{attachment.name}}</span>
+                <div class="download" (click)="downloadAttachment(i)">
+                  <fa-icon [icon]="faDownload" class="fa-download"></fa-icon>&nbsp;&nbsp;{{attachment.name}}
+                </div>
               </td>
               <td>
                 {{attachment.size}}

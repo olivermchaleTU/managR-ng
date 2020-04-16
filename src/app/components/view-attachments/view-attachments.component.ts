@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { AttachmentsService } from 'src/app/services/attachments/attachments.service';
 import { Attachment } from 'src/app/utils/types/AttachmentTypes';
-import { IconDefinition, faSpinner, faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
+import { IconDefinition, faSpinner, faChevronDown, faChevronUp, faDownload } from '@fortawesome/free-solid-svg-icons';
 import { BlobServiceClient } from '@azure/storage-blob';
 import { saveAs } from 'file-saver';
 
@@ -17,6 +17,7 @@ export class ViewAttachmentsComponent implements OnInit {
   faSpinner: IconDefinition = faSpinner;
   faChevronDown: IconDefinition = faChevronDown;
   faChevronUp: IconDefinition = faChevronUp;
+  faDownload: IconDefinition = faDownload;
   $routeParams: Subscription;
   $attachments: Subscription;
   $attachmentsAdded: Subscription;
