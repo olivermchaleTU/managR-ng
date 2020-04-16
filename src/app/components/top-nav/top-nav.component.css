@@ -26,7 +26,7 @@
 }
 
 .x {
-    background-color: white;
+    background-color: var(--theme-main);;
     padding: 5px;
 }
 
@@ -35,10 +35,15 @@
 }
 
 .managR-nav {
-    background-color: white;
+    background-color: var(--theme-main);
     box-shadow: 0 1px 3px 0 rgba(21,27,38,.15);
+}
+
+.dropdown-item {
+    color: var(--text-main);
 }
 
 .dropdown-item:hover {
     cursor: pointer;
+    background-color: var(--theme-main);
 }

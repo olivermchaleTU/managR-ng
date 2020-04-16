@@ -2,6 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { BoardStory, BoardTask } from 'src/app/utils/types/BoardTypes';
 import { moveItemInArray, CdkDragDrop, transferArrayItem, CdkDragEnter, CdkDragExit } from '@angular/cdk/drag-drop';
 import { faEye, faEyeSlash, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { AgileItemsService } from 'src/app/services/agile-items/agile-items.service';
+import { Router } from '@angular/router';
+import { ItemUtilityService } from 'src/app/services/item-utility/item-utility.service';
 
 @Component({
   selector: 'app-board-list',
@@ -16,12 +19,16 @@ export class BoardListComponent implements OnInit {
   faEye: IconDefinition = faEye;
   faEyeSlash: IconDefinition = faEyeSlash;
 
-  constructor() { }
+  constructor(
+    private agileItemsService: AgileItemsService,
+    private itemUtilityService: ItemUtilityService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
   }
 
-  itemDropped($event: CdkDragDrop<string[]>) {
+  itemDropped($event: CdkDragDrop<BoardTask[]>) {
     if ($event.previousContainer === $event.container) {
       moveItemInArray($event.container.data, $event.previousIndex, $event.currentIndex);
     } else {
@@ -29,52 +36,59 @@ export class BoardListComponent implements OnInit {
                         $event.container.data,
                         $event.previousIndex,
                         $event.currentIndex);
+
+      this.updateStatusStyling($event);
     }
   }
 
-  getStatusClass(item: BoardTask) {
-    switch (item.status) {
-      case 0:
-        return 'border-purple';
-      case 1:
-        return 'border-orange';
-      case 2:
-        return 'border-red';
-      case 3:
-        return 'border-green';
-      default:
-        return 'border-purple';
+  updateStatusStyling($event: CdkDragDrop<BoardTask[]>) {
+    const status = ($event.container.id);
+    const movedItem = this.story.tasks[status][$event.currentIndex];
+    switch (status) {
+      case 'todo':
+        movedItem.status = 0;
+        break;
+      case 'inProgress':
+        movedItem.status = 1;
+        break;
+      case 'blocked':
+        movedItem.status = 2;
+        break;
+      case 'done':
+        movedItem.status = 3;
     }
+    this.updateAgileItem(movedItem);
   }
 
-  getPriorityTag(item: BoardTask) {
-    switch (item.priority) {
-      case 0:
-        return 'Low';
-      case 1:
-        return 'Medium';
-      case 2:
-        return 'High';
-      default:
-        return 'Unknown';
-    }
-  }
-
-  getPriorityClass(item: BoardTask) {
-    switch (item.priority) {
-      case 0:
-        return 'badge-green';
-      case 1:
-        return 'badge-orange';
-      case 2:
-        return 'badge-red';
-      default:
-        return 'badge-purple';
-    }
+  updateAgileItem(movedItem: BoardTask) {
+    this.agileItemsService.updateAgileItem(movedItem).subscribe(
+    resp => {
+      console.log('success' + resp);
+    },
+    err => {
+      console.log('err' + err);
+    });
   }
 
   toggleStoryVisiblity() {
     this.tasksVisible = !this.tasksVisible;
+  }
+
+  navigateToItem(item: BoardTask) {
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['/details', item.id]);
+  }
+
+  getStatusClass(status: number) {
+    return this.itemUtilityService.getStatusClass(status);
+  }
+
+  getPriorityClass(priority: number) {
+    return this.itemUtilityService.getPriorityClass(priority);
+  }
+
+  getPriorityTag(priority: number) {
+    return this.itemUtilityService.getPriorityTag(priority);
   }
 
 }

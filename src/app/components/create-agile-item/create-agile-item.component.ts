@@ -253,11 +253,13 @@ export class CreateAgileItemComponent implements OnInit, OnDestroy {
   }
 
   setOrderValidator(storyTitle) {
-    this.selectedStory = this.stories.find(x => x.title === storyTitle);
-    const order = this.selectedStory.order;
-    this.createItemForm.controls.order.setValidators(
-      [Validators.required, Validators.min(order + 1), Validators.max(order + 1), Validators.pattern('^[0-9]+$')]
-    );
+    if (this.stories) {
+      this.selectedStory = this.stories.find(x => x.title === storyTitle);
+      const order = this.selectedStory.order;
+      this.createItemForm.controls.order.setValidators(
+        [Validators.required, Validators.min(order + 1), Validators.max(order + 1), Validators.pattern('^[0-9]+$')]
+      );
+    }
   }
 
   ngOnDestroy() {

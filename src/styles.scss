@@ -2,13 +2,19 @@
 
 :root {
     /* Colours */
-    --managR-blue: #67D0DD;
-    --managR-green: #9FE481;
     --managR-yellow: #F6E785;
-    --managR-red: #FAAFA5;
     --managR-pink: #DC95DD;
-    --managR-purple: #A885EE;
+    --managR-red: #e8384f;
+    --managR-purple: #aa62e3;
+    --managR-orange: #eec300;
+    --managR-green: #a4cf30;
+    --managR-blue: #b2fefa;
     --managR-lightext: rgb(224, 224, 224);
+
+    --theme-main: white;
+    --background-default: #f6f8f9;
+    --card-default: white;
+    --text-main: black;
 }
 
 .cdkDrag {
@@ -17,4 +23,32 @@
 
 .modal {
     background: rgba(0,0,0,0.6);
+}
+
+.error-text {
+    padding-top: 2px;
+    color: red;
+}
+
+body {
+    color: var(--text-main) !important;
+}
+
+.dropdown-menu.show {
+    background: var(--background-default);
+    color: var(--text-main);
+}
+
+.form-control {
+    background-color: var(--background-default) !important;
+    color: var(--text-main) !important;
+}
+
+html, body {
+    height: 100%;
+}
+.fill-height {
+    min-height: 100%;
+    height:auto !important; /* cross-browser */
+    height: 100%; /* cross-browser */
 }

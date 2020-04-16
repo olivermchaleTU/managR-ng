@@ -13,11 +13,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { NgPersonModule } from 'ng-person';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthService } from './services/auth/auth.service';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ModalComponent } from './components/modal/modal.component';
 import { BoardToolbarComponent } from './components/board-toolbar/board-toolbar.component';
 import { ModalService } from './services/modal/modal.service';
@@ -26,6 +25,22 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ValidationService } from './services/validation/validation.service';
 import { UsersService } from './services/users/users.service';
 import { AgileItemsService } from './services/agile-items/agile-items.service';
+import { AgileItemDetailsComponent } from './components/agile-item-details/agile-item-details.component';
+import { ItemUtilityService } from './services/item-utility/item-utility.service';
+import { RelatedItemOverviewComponent } from './components/related-item-overview/related-item-overview.component';
+import { AgileItemCommentsComponent } from './components/agile-item-comments/agile-item-comments.component';
+import { CommentsService } from './services/comments/comments.service';
+import { AddCommentComponent } from './components/add-comment/add-comment.component';
+import { ThemeService } from './services/theme/theme.service';
+import { ComparisonChartComponent } from './components/comparison-chart/comparison-chart.component';
+import { ChartsModule } from 'ng2-charts';
+import { AnalyticsComponent } from './components/analytics/analytics.component';
+import { ChartService } from './services/chart/chart.service';
+import { NgCircleProgressModule } from 'ng-circle-progress';
+import { AddAttachmentComponent } from './components/add-attachment/add-attachment.component';
+import { AttachmentsService } from './services/attachments/attachments.service';
+import { ViewAttachmentsComponent } from './components/view-attachments/view-attachments.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,18 +52,28 @@ import { AgileItemsService } from './services/agile-items/agile-items.service';
     RegisterComponent,
     ModalComponent,
     BoardToolbarComponent,
-    CreateAgileItemComponent
+    CreateAgileItemComponent,
+    AgileItemDetailsComponent,
+    RelatedItemOverviewComponent,
+    AgileItemCommentsComponent,
+    AddCommentComponent,
+    ComparisonChartComponent,
+    AnalyticsComponent,
+    AddAttachmentComponent,
+    ViewAttachmentsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     DragDropModule,
-    NgPersonModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     FontAwesomeModule,
     ReactiveFormsModule,
-    NgbModule
+    FormsModule,
+    NgbModule,
+    ChartsModule,
+    NgCircleProgressModule.forRoot({})
   ],
   providers: [
     BoardService,
@@ -56,7 +81,12 @@ import { AgileItemsService } from './services/agile-items/agile-items.service';
     ModalService,
     ValidationService,
     UsersService,
-    AgileItemsService
+    AgileItemsService,
+    ItemUtilityService,
+    CommentsService,
+    ThemeService,
+    ChartService,
+    AttachmentsService,
   ],
   bootstrap: [AppComponent]
 })

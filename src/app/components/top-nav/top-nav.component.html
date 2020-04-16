@@ -10,7 +10,8 @@
       </a>
       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
         <a class="dropdown-item" [routerLink]="['/profile', userId]">My Profile</a>
-        <a class="dropdown-item" href="#">Tasks</a>
+        <a class="dropdown-item" (click)="setTheme('dark')">Dark theme</a>
+        <a class="dropdown-item" (click)="setTheme('light')">Light theme</a>
         <a class="dropdown-item" (click)="logout()">Log Out</a>
       </div>
     </li>

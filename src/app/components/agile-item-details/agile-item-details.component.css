@@ -1,0 +1,141 @@
+.center {
+    align-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.mt {
+    margin-top: 20px;
+}
+
+.pt {
+    padding-top: 20px;
+}
+
+.container-fluid {
+    background-color: var(--background-default);;
+    height: 100%;
+}
+
+.fa-chevron {
+    padding-left: 8px;
+    padding-right: 8px;
+    color: #007bff;
+}
+
+.title-box, .parent-title, .title, .title-text {
+    display: inline-block;
+    font-size: large;
+    font-weight: bold;
+}
+
+.badge-green {
+    background-color: #a4cf30;;
+}
+
+.badge-orange {
+    background-color: #eec300;;
+}
+
+.badge-red {
+    background-color: #e8384f;;
+}
+
+.badge-purple {
+    background-color: #aa62e3;;
+}
+
+.badge {
+    width: fit-content;
+    color: white;
+}
+
+label {
+    font-weight: bolder;
+    display: block;
+}
+
+.title-box {
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+
+.managR-card {
+    background-color: var(--theme-main);;
+    font-size: 14px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px 0 rgba(21,27,38,.15);
+    padding: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    display: block;
+    margin-top: 20px;
+}
+
+.profile-link {
+    font-weight: bold;
+}
+
+.item-attribute {
+        align-content: center;
+        align-items: center;
+        text-align: center;
+}
+
+.ml-10 {
+    margin-left: 10px;
+}
+
+.mt-15 {
+    margin-top: 15px;
+}
+
+.mb5 {
+    margin-bottom: 5px;
+}
+.hr-red {
+    border: 2px solid #e8384f;
+}
+.hr-purple {
+    border: 2px solid #aa62e3;
+} 
+.hr-orange {
+    border: 2px solid #eec300;
+} 
+.hr-green {
+    border: 2px solid #a4cf30;
+} 
+.hr-blue {
+    border: 2px solid #b2fefa;
+}
+
+.date-time {
+    margin-bottom: 5px;
+}
+
+.editable-dropdown {
+    cursor: pointer;
+    color: var(--text-main);
+}
+
+.clickable:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.dropdown-menu.show {
+    background: var(--background-default);
+}
+
+.button-group {
+    margin-top: 10px;
+}
+
+.hide {
+    display: none;
+}
+
+.mb-11 {
+    margin-bottom: 11px;
+}

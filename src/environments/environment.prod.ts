@@ -1,5 +1,7 @@
 export const environment = {
   production: true,
-  storyServiceBaseUrl: 'https://localhost:44365/',
-  authServiceBaseUrl: 'https://localhost:5001'
+  storyServiceBaseUrl: 'https://managr-story.azurewebsites.net/',
+  authServiceBaseUrl: 'https://managr-auth.azurewebsites.net',
+  commentsServiceBaseUrl: 'https://managr-comments.azurewebsites.net/',
+  attachmentsServiceBaseUrl: 'https://managrattachments.azurewebsites.net/'
 };

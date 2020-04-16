@@ -21,10 +21,10 @@
             [cdkDropListConnectedTo]="[progressList, doneList, blockedList]" class="item-list"
             (cdkDropListDropped)="itemDropped($event)" [class.drag-notify]="dragging">
             <div class="item-box" (cdkDragStarted)="dragging = true;" (cdkDragEnded)="dragging = false"
-              *ngFor="let item of story.tasks.todo" [ngClass]="getStatusClass(item)" cdkDrag>
+              *ngFor="let item of story.tasks.todo" (click)="navigateToItem(item)" [ngClass]="getStatusClass(item.status)" cdkDrag>
               <strong>{{item.title}}</strong>
               <p>{{item.description}}</p>
-              <div class="badge" [ngClass]="getPriorityClass(item)">{{getPriorityTag(item)}}</div>
+              <div class="badge" [ngClass]="getPriorityClass(item.priority)">{{getPriorityTag(item.priority)}}</div>
             </div>
           </div>
         </div>
@@ -34,14 +34,14 @@
       <div class="drag-container">
         <div class="list-heading text-center">
           <div class="status-heading">In Progress</div>
-          <div cdkDropList id="progress" #progressList="cdkDropList" [cdkDropListData]="story.tasks.inProgress"
+          <div cdkDropList id="inProgress" #progressList="cdkDropList" [cdkDropListData]="story.tasks.inProgress"
             [cdkDropListConnectedTo]="[todoList, doneList, blockedList]" class="item-list"
             (cdkDropListDropped)="itemDropped($event)" [class.drag-notify]="dragging">
             <div class="item-box" (cdkDragStarted)="dragging = true;" (cdkDragEnded)="dragging = false"
-              *ngFor="let item of story.tasks.inProgress" [ngClass]="getStatusClass(item)" cdkDrag>
+              *ngFor="let item of story.tasks.inProgress" (click)="navigateToItem(item)" [ngClass]="getStatusClass(item.status)" cdkDrag>
               <strong>{{item.title}}</strong>
               <p>{{item.description}}</p>
-              <div class="badge" [ngClass]="getPriorityClass(item)">{{getPriorityTag(item)}}</div>
+              <div class="badge" [ngClass]="getPriorityClass(item.priority)">{{getPriorityTag(item.priority)}}</div>
             </div>
           </div>
         </div>
@@ -55,10 +55,10 @@
             [cdkDropListConnectedTo]="[todoList, progressList, blockedList]" class="item-list"
             (cdkDropListDropped)="itemDropped($event)" [class.drag-notify]="dragging">
             <div class="item-box" (cdkDragStarted)="dragging = true;" (cdkDragEnded)="dragging = false"
-              *ngFor="let item of story.tasks.done" [ngClass]="getStatusClass(item)" cdkDrag>
+              *ngFor="let item of story.tasks.done" (click)="navigateToItem(item)" [ngClass]="getStatusClass(item.status)" cdkDrag>
               <strong>{{item.title}}</strong>
               <p>{{item.description}}</p>
-              <div class="badge" [ngClass]="getPriorityClass(item)">{{getPriorityTag(item)}}</div>
+              <div class="badge" [ngClass]="getPriorityClass(item.priority)">{{getPriorityTag(item.priority)}}</div>
             </div>
           </div>
         </div>
@@ -72,15 +72,15 @@
             [cdkDropListConnectedTo]="[todoList, progressList, doneList]" class="item-list"
             (cdkDropListDropped)="itemDropped($event)" [class.drag-notify]="dragging">
             <div class="item-box" (cdkDragStarted)="dragging = true;" (cdkDragEnded)="dragging = false"
-              *ngFor="let item of story.tasks.blocked" [ngClass]="getStatusClass(item)" cdkDrag>
+              *ngFor="let item of story.tasks.blocked" (click)="navigateToItem(item)" [ngClass]="getStatusClass(item.status)" cdkDrag>
               <strong>{{item.title}}</strong>
               <p>{{item.description}}</p>
-              <div class="badge" [ngClass]="getPriorityClass(item)">{{getPriorityTag(item)}}</div>
+              <div class="badge" [ngClass]="getPriorityClass(item.priority)">{{getPriorityTag(item.priority)}}</div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <hr />
+  <div class="seperator"></div>
 </div>

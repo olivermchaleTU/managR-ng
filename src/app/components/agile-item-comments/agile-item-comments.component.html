@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="col-md-10 offset-md-1">
+    <div class="managR-card mb-50">
+      <div class="row pt-20">
+        <div class="col-md-11 offset-md-1 ml-15">
+          <div class="center mt" *ngIf="commentsLoading">
+            <fa-icon [icon]="faSpinner" [spin]="true" size="lg"></fa-icon>
+          </div>
+          <div class="center mt err-txt" *ngIf="commentsErrored">
+            Error getting comments
+          </div>
+          <div class="center mt err-txt" *ngIf="noComments">
+            No comments yet
+          </div>
+          <div *ngIf="!commentsLoading && !commentsErrored && !noComments">
+            <div *ngFor="let comment of comments">
+              <div class="commenter-name">
+                <a [routerLink]="['/profile', comment.commenterId]">{{comment.commenterName}}</a>
+              </div>
+              <div class="comment-date">
+                &nbsp;&nbsp;{{getDateString(comment.createdAt)}}
+              </div>
+              <div class="comment">
+                {{comment.comment}}
+              </div>
+              <hr/>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mb-30">
+        <div class="col-md-11 ml-15">
+            <app-add-comment [id]="id"></app-add-comment>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

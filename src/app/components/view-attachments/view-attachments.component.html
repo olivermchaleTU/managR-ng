@@ -1,0 +1,52 @@
+<div class="center mt" *ngIf="loading">
+  <fa-icon [icon]="faSpinner" [spin]="true" size="lg">Loading attachments</fa-icon>
+</div>
+<div class="center mt err-txt" *ngIf="error">
+  Error getting Attachments
+</div>
+<div class="center mt err-txt" *ngIf="noAttachments">
+  No Attachments Available
+</div>
+<div *ngIf="!loading && !error && !noAttachments">
+  <div *ngIf="!attachmentsVisible">
+    Show attachments&nbsp;<fa-icon [icon]="faChevronDown" (click)="attachmentsVisible = true"></fa-icon>
+  </div>
+  <div *ngIf="attachmentsVisible">
+    Hide attachments&nbsp;<fa-icon [icon]="faChevronUp" (click)="attachmentsVisible = false"></fa-icon>
+    <br />
+    <div class="row">
+      <div class="col-md-11">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Size</th>
+              <th scope="col">Uploaded By</th>
+              <th scope="col">Uploaded On</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let attachment of attachments; let i = index">
+              <td>
+                <span (click)="downloadAttachment(i)">{{attachment.name}}</span>
+              </td>
+              <td>
+                {{attachment.size}}
+              </td>
+              <td>
+                <a [routerLink]="['/profile', attachment.uploaderId]">{{attachment.uploadedBy}}</a>
+              </td>
+              <td>
+                {{getDateString(attachment.uploadedOn)}}
+              </td>
+              <td>
+                {{getStatusText(attachment.status)}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

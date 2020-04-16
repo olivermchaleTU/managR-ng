@@ -22,10 +22,10 @@
           </label>
           <input type="text" formControlName="title" id="title" class="form-control">
           <div *ngIf="form.title.errors && form.title.touched">
-            <div *ngIf="form.title.errors.required">
+            <div class="error-text" *ngIf="form.title.errors.required">
               Title is required
             </div>
-            <div *ngIf="form.title.errors.minlength && !form.title.errors.required">
+            <div class="error-text" *ngIf="form.title.errors.minlength && !form.title.errors.required">
               Title must have a minimum length of 3
             </div>
           </div>
@@ -37,10 +37,10 @@
           <textarea class="form-control" id="description" formControlName="description">
           </textarea>
           <div *ngIf="form.description.errors && form.description.touched">
-            <div *ngIf="form.description.errors.required">
+            <div class="error-text" *ngIf="form.description.errors.required">
               Description is required
             </div>
-            <div *ngIf="form.description.errors.minlength && !form.description.errors.required">
+            <div class="error-text" *ngIf="form.description.errors.minlength && !form.description.errors.required">
               Description must have a minimum length of 3
             </div>
           </div>
@@ -53,10 +53,10 @@
           <input class="form-control" type="text" placeholder="YYYY-MM-DD" formControlName="dueBy" ngbDatepicker
             #d="ngbDatepicker" />
           <div *ngIf="form.dueBy.errors && form.dueBy.touched">
-            <div *ngIf="form.dueBy.errors.required">
+            <div class="error-text" *ngIf="form.dueBy.errors.required">
               Due by date is required
             </div>
-            <div *ngIf="!form.dueBy.errors.required">
+            <div class="error-text" *ngIf="!form.dueBy.errors.required">
               Invalid Date
             </div>
           </div>
@@ -71,7 +71,7 @@
             </option>
           </select>
           <div *ngIf="form.priority.errors && form.priority.touched">
-            <div *ngIf="form.priority.errors.required">
+            <div class="error-text" *ngIf="form.priority.errors.required">
               Priority is required
             </div>
           </div>
@@ -86,7 +86,7 @@
             </option>
           </select>
           <div *ngIf="form.board.errors && form.board.touched">
-            <div *ngIf="form.board.errors.required">
+            <div class="error-text" *ngIf="form.board.errors.required">
               Board is required
             </div>
           </div>
@@ -102,7 +102,7 @@
             <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
           </ng-template>
           <div *ngIf="form.assignee.errors && form.assignee.touched">
-            <div *ngIf="form.assignee.errors.required">
+            <div class="error-text" *ngIf="form.assignee.errors.required">
               Assignee is required
             </div>
           </div>
@@ -119,7 +119,7 @@
               <ngb-highlight [result]="r.title" [term]="t"></ngb-highlight>
             </ng-template>
             <div *ngIf="form.superStory.errors && form.superStory.touched">
-              <div *ngIf="form.superStory.errors.required">
+              <div class="error-text" *ngIf="form.superStory.errors.required">
                 Super story is required
               </div>
             </div>
@@ -130,10 +130,10 @@
             </label>
             <input id="storyPoints" type="number" formControlName="storyPoints" class="form-control">
             <div *ngIf="form.storyPoints.errors && form.storyPoints.touched">
-              <div *ngIf="form.storyPoints.errors.required">
+              <div class="error-text" *ngIf="form.storyPoints.errors.required">
                 Story points is required
               </div>
-              <div *ngIf="form.storyPoints.errors.pattern">
+              <div class="error-text" *ngIf="form.storyPoints.errors.pattern">
                 Invalid story points value, must be a positive number
               </div>
             </div>
@@ -151,7 +151,7 @@
               <ngb-highlight [result]="r.title" [term]="t"></ngb-highlight>
             </ng-template>
             <div *ngIf="form.story.errors && form.story.touched">
-              <div *ngIf="form.story.errors.required">
+              <div class="error-text" *ngIf="form.story.errors.required">
                 Story is required
               </div>
             </div>
@@ -162,16 +162,16 @@
             </label>
             <input id="order" placeholder="{{getOrderPlaceholder()}}" type="number" formControlName="order" class="form-control">
             <div *ngIf="form.order.errors && form.order.touched">
-              <div *ngIf="form.order.errors.required">
+              <div class="error-text" *ngIf="form.order.errors.required">
                 Order is required
               </div>
-              <div *ngIf="form.order.errors.pattern">
+              <div class="error-text" *ngIf="form.order.errors.pattern">
                 Invalid Order value, must be a whole positive number
               </div>
-              <div *ngIf="form.order.errors.min">
+              <div class="error-text" *ngIf="form.order.errors.min">
                 Order cannot be smaller than existing task order
               </div>
-              <div *ngIf="form.order.errors.max">
+              <div class="error-text" *ngIf="form.order.errors.max">
                 Order cannot be more than 1 greater than current order value
               </div>
             </div>
@@ -182,10 +182,10 @@
             </label>
             <input id="estimatedTime" type="number" formControlName="estimatedTime" class="form-control">
             <div *ngIf="form.estimatedTime.errors && form.estimatedTime.touched">
-              <div *ngIf="form.estimatedTime.errors.required">
+              <div class="error-text" *ngIf="form.estimatedTime.errors.required">
                 Estimated Time is required
               </div>
-              <div *ngIf="form.estimatedTime.errors.pattern">
+              <div class="error-text" *ngIf="form.estimatedTime.errors.pattern">
                 Invalid Estimated Time value, must be a positive whole number
               </div>
             </div>

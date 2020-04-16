@@ -1,0 +1,68 @@
+.managR-card {
+    background-color: var(--theme-main);;
+    font-size: 14px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px 0 rgba(21,27,38,.15);
+    padding: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    display: inline-block;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.nm {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+.managR-card:hover {
+    cursor: pointer;
+}
+
+.title-text {
+    font-size: large;
+    font-weight: bold;
+    height: 30px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.col-lg-3 {
+    display: inline-block;
+}
+.h20 {
+    height: 20px;
+}
+.badge-green {
+    background-color: #a4cf30;;
+}
+
+.badge-orange {
+    background-color: #eec300;;
+}
+
+.description {
+    height: 30px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.badge-red {
+    background-color: #e8384f;;
+}
+
+.badge-purple {
+    background-color: #aa62e3;;
+}
+
+.badge {
+    color: white;
+}
+
+.center {
+    align-content: center;
+    align-items: center;
+    text-align: center;
+}

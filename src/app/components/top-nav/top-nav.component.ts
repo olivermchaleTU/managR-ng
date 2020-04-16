@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { faUserCircle, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { ThemeService } from 'src/app/services/theme/theme.service';
 
 @Component({
   selector: 'app-top-nav',
@@ -12,7 +13,10 @@ export class TopNavComponent implements OnInit {
   userId = 'err';
   userName = 'Oliver McHale';
   faUserCircle: IconDefinition = faUserCircle;
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService,
+    private themeService: ThemeService
+    ) { }
 
   ngOnInit() {
     this.userId = localStorage.getItem('currentUserId');
@@ -27,6 +31,10 @@ export class TopNavComponent implements OnInit {
 
   logout() {
     this.authService.logout();
+  }
+
+  setTheme(theme: string) {
+    theme === 'light' ? this.themeService.setLightTheme() : this.themeService.setDarkTheme()
   }
 
 }

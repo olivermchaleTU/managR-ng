@@ -22,6 +22,8 @@ export class BoardTask {
     order: number;
     priority: number;
     status: number;
+    assigneeName: string;
+    assigneeId: string;
 }
 
 export class BoardResponse {
