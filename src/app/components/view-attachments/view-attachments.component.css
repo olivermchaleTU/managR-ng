@@ -6,3 +6,19 @@ td {
     text-overflow: ellipsis;
     word-break: break-all;
 }
+
+.download {
+    color:#007bff;
+    font-weight: bold;
+}
+
+.download:hover {
+    cursor: pointer;
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+.fa-download {
+    text-decoration: none;
+    font-weight: bolder;
+}
