@@ -9,7 +9,7 @@ import { BoardComponent } from './components/board/board.component';
 import { BoardListComponent } from './components/board-list/board-list.component';
 import { TopNavComponent } from './components/top-nav/top-nav.component';
 import { BoardService } from './services/board/board.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -40,6 +40,7 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
 import { AddAttachmentComponent } from './components/add-attachment/add-attachment.component';
 import { AttachmentsService } from './services/attachments/attachments.service';
 import { ViewAttachmentsComponent } from './components/view-attachments/view-attachments.component';
+import { TokenInterceptor } from './services/auth/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -87,6 +88,11 @@ import { ViewAttachmentsComponent } from './components/view-attachments/view-att
     ThemeService,
     ChartService,
     AttachmentsService,
+      {
+        provide: HTTP_INTERCEPTORS,
+        useClass: TokenInterceptor,
+        multi: true
+      }
   ],
   bootstrap: [AppComponent]
 })

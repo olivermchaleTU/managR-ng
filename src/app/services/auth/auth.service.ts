@@ -59,4 +59,8 @@ export class AuthService {
     localStorage.setItem('currentUserRole', decodedToken.role);
     localStorage.setItem('currentTokenExpiry', decodedToken.exp);
   }
+
+  getToken(): string {
+    return localStorage.getItem('token');
+  }
 }
