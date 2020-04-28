@@ -33,15 +33,15 @@ export class BoardListComponent implements OnInit {
       moveItemInArray($event.container.data, $event.previousIndex, $event.currentIndex);
     } else {
       transferArrayItem($event.previousContainer.data,
-                        $event.container.data,
-                        $event.previousIndex,
-                        $event.currentIndex);
+        $event.container.data,
+        $event.previousIndex,
+        $event.currentIndex);
 
       this.updateStatusStyling($event);
     }
   }
 
-  updateStatusStyling($event: CdkDragDrop<BoardTask[]>) {
+  async updateStatusStyling($event: CdkDragDrop<BoardTask[]>) {
     const status = ($event.container.id);
     const movedItem = this.story.tasks[status][$event.currentIndex];
     switch (status) {
@@ -52,7 +52,16 @@ export class BoardListComponent implements OnInit {
         movedItem.status = 1;
         break;
       case 'blocked':
-        movedItem.status = 2;
+        const blocked = await this.agileItemsService.getBlockedReason();
+        if (blocked != null) {
+          movedItem.blockedReason = blocked;
+          movedItem.status = 2;
+        } else {
+          transferArrayItem($event.container.data,
+            $event.previousContainer.data,
+            $event.currentIndex,
+            $event.previousIndex);
+        }
         break;
       case 'done':
         movedItem.status = 3;
@@ -62,12 +71,12 @@ export class BoardListComponent implements OnInit {
 
   updateAgileItem(movedItem: BoardTask) {
     this.agileItemsService.updateAgileItem(movedItem).subscribe(
-    resp => {
-      console.log('success' + resp);
-    },
-    err => {
-      console.log('err' + err);
-    });
+      resp => {
+        console.log('success' + resp);
+      },
+      err => {
+        console.log('err' + err);
+      });
   }
 
   toggleStoryVisiblity() {

@@ -164,7 +164,15 @@ export class AgileItemDetailsComponent implements OnInit, OnDestroy {
     this.saveGenericChange();
   }
 
-  updateStatus(status: number) {
+  async updateStatus(status: number) {
+    if (status === 2) {
+      const reason = await this.agileItemsService.getBlockedReason();
+      if (reason != null) {
+        this.item.blockedReason = reason;
+      } else {
+        return;
+      }
+    }
     this.item.status = status;
     this.saveGenericChange();
   }
@@ -183,6 +191,13 @@ export class AgileItemDetailsComponent implements OnInit, OnDestroy {
     if (this.$routeParams) {
       this.$routeParams.unsubscribe();
     }
+  }
+
+  getTitle(item: AgileItem) {
+    if (item.blockedReason) {
+      return item.blockedReason;
+    }
+    return this.getStatusText(item.status);
   }
 
   saveGenericChange() {

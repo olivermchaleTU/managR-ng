@@ -52,6 +52,7 @@ export class AgileItem {
     loggedTime?: number;
     totalChildren?: number;
     completeChildren?: number;
+    blockedReason?: string;
 }
 
 export class AgileItemOverview {

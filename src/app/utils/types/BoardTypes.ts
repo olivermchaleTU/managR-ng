@@ -24,6 +24,7 @@ export class BoardTask {
     status: number;
     assigneeName: string;
     assigneeId: string;
+    blockedReason: string;
 }
 
 export class BoardResponse {
