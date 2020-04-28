@@ -228,6 +228,7 @@ export class CreateAgileItemComponent implements OnInit, OnDestroy {
       icon: 'success',
       confirmButtonText: 'Ok',
     }).then((clicked) => {
+      this.initialiseForm();
       this.modalService.setVisibilityStatus(false);
     });
   }
@@ -240,7 +241,8 @@ export class CreateAgileItemComponent implements OnInit, OnDestroy {
       icon: 'error',
       confirmButtonText: 'Ok',
     }).then((clicked) => {
-      this.modalService.setVisibilityStatus(false)
+      this.initialiseForm();
+      this.modalService.setVisibilityStatus(false);
     });
   }
 
@@ -270,6 +272,10 @@ export class CreateAgileItemComponent implements OnInit, OnDestroy {
     if (this.$boardSubscription) {
       this.$boardSubscription.unsubscribe();
     }
+  }
+
+  resetModal(): void {
+    this.initialiseForm();
   }
 
 
