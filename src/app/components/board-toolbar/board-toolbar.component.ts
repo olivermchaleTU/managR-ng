@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { IconDefinition, faPlus, faChartLine } from '@fortawesome/free-solid-svg-icons';
+import { IconDefinition, faPlus, faChartLine, faSitemap } from '@fortawesome/free-solid-svg-icons';
 import { ModalService } from 'src/app/services/modal/modal.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
@@ -13,6 +13,7 @@ export class BoardToolbarComponent implements OnInit, OnDestroy {
 
   faPlus: IconDefinition = faPlus;
   faChartLine: IconDefinition = faChartLine;
+  faSitemap: IconDefinition = faSitemap;
   $modalSubscription: Subscription;
   visible = false;
 
@@ -41,7 +42,12 @@ export class BoardToolbarComponent implements OnInit, OnDestroy {
 
   navigateToAnalytics() {
     const boardId = localStorage.getItem('boardId');
-    this.router.navigate(['/analytics', boardId])
+    this.router.navigate(['/analytics', boardId]);
+  }
+
+  navigateToTopology() {
+    const boardId = localStorage.getItem('boardId');
+    this.router.navigate(['/topology', boardId]);
   }
 
 }

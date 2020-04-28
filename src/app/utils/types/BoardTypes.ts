@@ -39,3 +39,28 @@ export class BoardName {
 export class BoardNameList {
     boardNames: BoardName[];
 }
+
+export class BoardTopology {
+    superStories: SuperStoryTopology[];
+    boardTitle: string;
+    superStoryCount: number;
+    storyCount: number;
+    taskCount: number;
+}
+
+export class SuperStoryTopology {
+    id: string;
+    title: string;
+    stories: StoryTopology[];
+}
+
+export class StoryTopology {
+    id: string;
+    title: string;
+    tasks: TaskTopology[];
+}
+
+export class TaskTopology {
+    id: string;
+    title: string;
+}

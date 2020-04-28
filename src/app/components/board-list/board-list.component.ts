@@ -1,10 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { BoardStory, BoardTask } from 'src/app/utils/types/BoardTypes';
 import { moveItemInArray, CdkDragDrop, transferArrayItem, CdkDragEnter, CdkDragExit } from '@angular/cdk/drag-drop';
-import { faEye, faEyeSlash, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faEyeSlash, IconDefinition, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { AgileItemsService } from 'src/app/services/agile-items/agile-items.service';
 import { Router } from '@angular/router';
 import { ItemUtilityService } from 'src/app/services/item-utility/item-utility.service';
+import { ModalService } from 'src/app/services/modal/modal.service';
 
 @Component({
   selector: 'app-board-list',
@@ -16,11 +17,13 @@ export class BoardListComponent implements OnInit {
   @Input() story: BoardStory;
   tasksVisible = true;
   dragging = false;
+  faPlus: IconDefinition = faPlus;
   faEye: IconDefinition = faEye;
   faEyeSlash: IconDefinition = faEyeSlash;
 
   constructor(
     private agileItemsService: AgileItemsService,
+    private modalService: ModalService,
     private itemUtilityService: ItemUtilityService,
     private router: Router
   ) { }
@@ -77,6 +80,10 @@ export class BoardListComponent implements OnInit {
       err => {
         console.log('err' + err);
       });
+  }
+
+  openModal() {
+    this.modalService.setVisibilityStatus(true);
   }
 
   toggleStoryVisiblity() {

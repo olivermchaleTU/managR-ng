@@ -41,6 +41,7 @@ import { AddAttachmentComponent } from './components/add-attachment/add-attachme
 import { AttachmentsService } from './services/attachments/attachments.service';
 import { ViewAttachmentsComponent } from './components/view-attachments/view-attachments.component';
 import { TokenInterceptor } from './services/auth/token.interceptor';
+import { TopologyComponent } from './components/topology/topology.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { TokenInterceptor } from './services/auth/token.interceptor';
     ComparisonChartComponent,
     AnalyticsComponent,
     AddAttachmentComponent,
-    ViewAttachmentsComponent
+    ViewAttachmentsComponent,
+    TopologyComponent
   ],
   imports: [
     BrowserModule,

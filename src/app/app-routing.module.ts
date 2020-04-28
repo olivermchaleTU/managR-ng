@@ -7,6 +7,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AgileItemDetailsComponent } from './components/agile-item-details/agile-item-details.component';
 import { AnalyticsComponent } from './components/analytics/analytics.component';
+import { TopologyComponent } from './components/topology/topology.component';
 
 
 const routes: Routes = [
@@ -48,7 +49,14 @@ const routes: Routes = [
     pathMatch: 'full',
     component: AnalyticsComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'topology/:id',
+    pathMatch: 'full',
+    component: TopologyComponent,
+    canActivate: [AuthGuard]
   }
+
 ];
 
 @NgModule({

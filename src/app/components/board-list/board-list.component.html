@@ -16,15 +16,35 @@
     <div class="col-md-3 eq-height">
       <div class="drag-container">
         <div class="list-heading text-center">
-          <div class="status-heading">To Do</div>
+          <div class="status-heading">To Do&nbsp;&nbsp;<fa-icon [icon]="faPlus" class="clickable" (click)="openModal()"></fa-icon></div>
           <div cdkDropList id="todo" #todoList="cdkDropList" [cdkDropListData]="story.tasks.todo"
             [cdkDropListConnectedTo]="[progressList, doneList, blockedList]" class="item-list"
             (cdkDropListDropped)="itemDropped($event)" [class.drag-notify]="dragging">
             <div class="item-box" (cdkDragStarted)="dragging = true;" (cdkDragEnded)="dragging = false"
-              *ngFor="let item of story.tasks.todo" (click)="navigateToItem(item)" [ngClass]="getStatusClass(item.status)" cdkDrag>
-              <strong>{{item.title}}</strong>
-              <p>{{item.description}}</p>
-              <div class="badge" [ngClass]="getPriorityClass(item.priority)">{{getPriorityTag(item.priority)}}</div>
+              *ngFor="let item of story.tasks.todo" (click)="navigateToItem(item)"
+              [ngClass]="getStatusClass(item.status)" cdkDrag>
+              <div class="row">
+                <div class="col-md-12">
+                  <strong>{{item.title}}</strong>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <p>{{item.description}}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 col-xs-6">
+                  <div class="badge" [ngClass]="getPriorityClass(item.priority)">{{getPriorityTag(item.priority)}}</div>
+                </div>
+                <div class="col-md-6 float-right">
+                  <div class="task-order">
+                    <div class="badge badge-light badge-text" title="Task Order">
+                      {{item.order}}
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -38,10 +58,30 @@
             [cdkDropListConnectedTo]="[todoList, doneList, blockedList]" class="item-list"
             (cdkDropListDropped)="itemDropped($event)" [class.drag-notify]="dragging">
             <div class="item-box" (cdkDragStarted)="dragging = true;" (cdkDragEnded)="dragging = false"
-              *ngFor="let item of story.tasks.inProgress" (click)="navigateToItem(item)" [ngClass]="getStatusClass(item.status)" cdkDrag>
-              <strong>{{item.title}}</strong>
-              <p>{{item.description}}</p>
-              <div class="badge" [ngClass]="getPriorityClass(item.priority)">{{getPriorityTag(item.priority)}}</div>
+              *ngFor="let item of story.tasks.inProgress" (click)="navigateToItem(item)"
+              [ngClass]="getStatusClass(item.status)" cdkDrag>
+              <div class="row">
+                <div class="col-md-12">
+                  <strong>{{item.title}}</strong>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <p>{{item.description}}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 col-xs-6">
+                  <div class="badge" [ngClass]="getPriorityClass(item.priority)">{{getPriorityTag(item.priority)}}</div>
+                </div>
+                <div class="col-md-6 float-right">
+                  <div class="task-order">
+                    <div class="badge badge-light badge-text" title="Task Order">
+                      {{item.order}}
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -55,10 +95,30 @@
             [cdkDropListConnectedTo]="[todoList, progressList, blockedList]" class="item-list"
             (cdkDropListDropped)="itemDropped($event)" [class.drag-notify]="dragging">
             <div class="item-box" (cdkDragStarted)="dragging = true;" (cdkDragEnded)="dragging = false"
-              *ngFor="let item of story.tasks.done" (click)="navigateToItem(item)" [ngClass]="getStatusClass(item.status)" cdkDrag>
-              <strong>{{item.title}}</strong>
-              <p>{{item.description}}</p>
-              <div class="badge" [ngClass]="getPriorityClass(item.priority)">{{getPriorityTag(item.priority)}}</div>
+              *ngFor="let item of story.tasks.done" (click)="navigateToItem(item)"
+              [ngClass]="getStatusClass(item.status)" cdkDrag>
+              <div class="row">
+                <div class="col-md-12">
+                  <strong>{{item.title}}</strong>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <p>{{item.description}}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 col-xs-6">
+                  <div class="badge" [ngClass]="getPriorityClass(item.priority)">{{getPriorityTag(item.priority)}}</div>
+                </div>
+                <div class="col-md-6 float-right">
+                  <div class="task-order">
+                    <div class="badge badge-light badge-text" title="Task Order">
+                      {{item.order}}
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -72,10 +132,30 @@
             [cdkDropListConnectedTo]="[todoList, progressList, doneList]" class="item-list"
             (cdkDropListDropped)="itemDropped($event)" [class.drag-notify]="dragging">
             <div class="item-box" (cdkDragStarted)="dragging = true;" (cdkDragEnded)="dragging = false"
-              *ngFor="let item of story.tasks.blocked" (click)="navigateToItem(item)" [ngClass]="getStatusClass(item.status)" cdkDrag>
-              <strong>{{item.title}}</strong>
-              <p>{{item.description}}</p>
-              <div class="badge" [ngClass]="getPriorityClass(item.priority)">{{getPriorityTag(item.priority)}}</div>
+              *ngFor="let item of story.tasks.blocked" (click)="navigateToItem(item)"
+              [ngClass]="getStatusClass(item.status)" cdkDrag>
+              <div class="row">
+                <div class="col-md-12">
+                  <strong>{{item.title}}</strong>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <p>{{item.description}}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 col-xs-6">
+                  <div class="badge" [ngClass]="getPriorityClass(item.priority)">{{getPriorityTag(item.priority)}}</div>
+                </div>
+                <div class="col-md-6 float-right">
+                  <div class="task-order">
+                    <div class="badge badge-light badge-text" title="Task Order">
+                      {{item.order}}
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

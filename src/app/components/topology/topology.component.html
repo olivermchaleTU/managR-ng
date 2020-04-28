@@ -1,0 +1,76 @@
+<div class="center mt" *ngIf="loading">
+  <fa-icon [icon]="faSpinner" [spin]="true" size="lg"></fa-icon>
+</div>
+<div *ngIf="!loading">
+  <div class="container-fluid pt">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>{{topology.boardTitle}}</h1>
+      </div>
+      <div class="col-sm-12 col-lg-4">
+        <div class="managR-card analytics-item">
+          <div class="row">
+            <div class="col-md-6 col-sm-6">
+              <div class="number-title managR-purple">
+                {{topology.superStoryCount}}
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+              <h5 class="number-description">Super Stories</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-lg-4">
+        <div class="managR-card analytics-item">
+          <div class="row">
+            <div class="col-md-6 col-sm-6">
+              <div class="number-title managR-purple">
+                {{topology.storyCount}}
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+              <h5 class="number-description">Stories</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-lg-4">
+        <div class="managR-card analytics-item">
+          <div class="row">
+            <div class="col-md-6 col-sm-6">
+              <div class="number-title managR-purple">
+                {{topology.taskCount}}
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+              <h5 class="number-description">Tasks</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h1>Toplogy</h1>
+    <div *ngFor="let superStory of topology.superStories">
+      <div class="superstories">
+        <div class="superstory-title">
+          <a [routerLink]="['/details', superStory.id]">{{superStory.title}}</a>
+        </div>
+      </div>
+      <div *ngFor="let story of superStory.stories">
+        <div class="stories">
+          <div class="story-title">
+            <a [routerLink]="['/details', story.id]">{{story.title}}</a>
+          </div>
+        </div>
+        <div *ngFor="let task of story.tasks">
+          <div class="tasks">
+            <div class="task-title">
+              <a [routerLink]="['/details', task.id]">{{task.title}}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
